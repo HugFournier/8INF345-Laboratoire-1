@@ -7,5 +7,11 @@
         "noImplicitAny": false,
         "noImplicitThis": false
     },
-    "types": "./src/typings.d.ts"
+    "types": "./src/typings.d.ts",
+    "files": [
+        "./Buisness/Article.ts",
+        "./Controller/AccueilController.ts",
+        "./Model/AccueilModel.ts",
+        "./Service/Service.ts"
+    ]
 }
