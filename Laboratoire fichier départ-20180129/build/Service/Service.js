@@ -1,3 +1,4 @@
+//import {Article} from "../Buisness/Article";
 var Service = /** @class */ (function () {
     function Service() {
     }

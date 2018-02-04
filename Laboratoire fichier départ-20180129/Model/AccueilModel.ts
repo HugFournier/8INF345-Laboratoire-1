@@ -1,3 +1,3 @@
 interface AccueilModel{
-     listerArticles() : Array<Article>;
+     afficherArticles();
 }

@@ -14,5 +14,8 @@ var Article = /** @class */ (function () {
     Article.prototype.getImage = function () {
         return this.image;
     };
+    Article.prototype.toString = function () {
+        return this.getLabel() + "\t" + this.getDescription();
+    };
     return Article;
 }());

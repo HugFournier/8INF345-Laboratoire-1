@@ -17,4 +17,8 @@ class Article{
     public getImage() : URL {
         return this.image;
     }
+
+    public toString() : String {
+        return this.getLabel() + "\t" + this.getDescription();
+    }
 }

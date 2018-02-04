@@ -6,7 +6,8 @@
         ],
         "noImplicitAny": false,
         "noImplicitThis": false,
-        "outDir": "build"
+        "outDir": "build",
+        "module": "none"
     },
     "types": "./src/typings.d.ts",
     "include": [
