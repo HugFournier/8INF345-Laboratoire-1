@@ -5,13 +5,14 @@
             "es2015", "dom"
         ],
         "noImplicitAny": false,
-        "noImplicitThis": false
+        "noImplicitThis": false,
+        "outDir": "build"
     },
     "types": "./src/typings.d.ts",
-    "files": [
-        "./Buisness/Article.ts",
-        "./Controller/AccueilController.ts",
-        "./Model/AccueilModel.ts",
-        "./Service/Service.ts"
+    "include": [
+        "Buisness/*",
+        "Controller/*",
+        "Model/*",
+        "Service/*"
     ]
 }
