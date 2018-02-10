@@ -12,10 +12,16 @@ export default class AccueilController {
 
         liArticles.forEach(element => {
             let img = "<img src='"+element.getImage()+"'/>";
-            html += "<tr><td>" + img +"</td><td>"+ element.getLabel() + "</td><td>" + (element.getDescription().length > 50 ? element.getDescription().substring(0, 47) + "..." : element.getDescription()) + "</td><td>CDN$ " + element.getPrix() + "</td><td><button id='addPanier' class='btn btn-primary'>Ajouter au panier</button></td></tr>";
+            html += "<tr><td>" + img +"</td><td>"+ element.getLabel() + "</td><td>" + (element.getDescription().length > 50 ? element.getDescription().substring(0, 47) + "..." : element.getDescription()) + "</td><td>CDN$ " + element.getPrix() + "</td><td>"+ this.getCodeBoutonAjouterPanier(element.getID()) +"</td></tr>";
         });
 
         return html += "</table>";
+    }
+
+    private getCodeBoutonAjouterPanier(ID : number) : string {
+        let tmp = "<button class='addPanier' idArticle='"+ID+"' class='btn btn-primary'>Ajouter au panier</button>";
+        //let btn = $('#addPanier').on('click', this.ajouterPanier(ID));
+        return tmp;
     }
 
     public getNav() : string{
@@ -23,11 +29,12 @@ export default class AccueilController {
         nav += "<div class='container'><div class='navbar-header'>";
         nav += "<a class='navbar-brand'>Catalogue</a></div>";
         nav += "<ul class='nav navbar-nav'><li><a>Accueil</a></li><li><a>Home</a></li></ul></div></nav>";
-
-        //return "<nav class='navbar navbar-inverse'><div class='container-fluid'><div class='navbar-header'><a class='navbar-brand'>Catalogue</a></div>
-        //<ul class='nav navbar-nav'><li><a href='#'>Accueil</a></li><li><a href='#'>Page 2</a></li></ul></div></nav>    <div class='container'><h3>Catalogue</h3><p>Bacon ipsum dolor amet swine porchetta drumstick salami, jerky kielbasa brisket buffalo bresaola ground round short ribs pork. Meatball alcatra beef ribs, andouille spare ribs swine short ribs pork picanha jerky ball tip ribeye ham. Short loin shankle rump, turducken fatback filet mignon t-bone short ribs biltong beef ribs tenderloin tail. Meatloaf jowl landjaeger, drumstick tenderloin pork belly burgdoggen chuck bresaola shankle tri-tip. Pork chop rump leberkas corned beef, porchetta filet mignon landjaeger pork belly picanha. Chuck porchetta pastrami turducken pork chop beef ribs. Swine kevin jerky, rump beef ribs prosciutto bacon beef buffalo.</p></div>";
+        
         return nav;
     }
 
+    public ajouterPanier(ID : string) : void {
+        console.log(ID);
+    }
+
 }
-//export { getArticles, getNav };
