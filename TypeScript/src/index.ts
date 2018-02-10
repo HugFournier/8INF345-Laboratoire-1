@@ -2,14 +2,14 @@ import * as $ from 'jquery';
 import Article from './Model/Article';
 import Service from './Service/Service';
 import AccueilController from './Controller/AccueilController';
-//import { getArticles, getNav } from './Controller/AccueilController';
 import { url } from 'inspector';
 
 $(function(){
+    let accueilController = new AccueilController();
     let body = $('body');
     let htmlAcc = "";
-    htmlAcc += getNav();
-    htmlAcc += getArticles();
+    htmlAcc += accueilController.getNav();
+    htmlAcc += accueilController.getArticles();
     body.html(htmlAcc);
     let uri = parseURL("");
     console.log(uri);
