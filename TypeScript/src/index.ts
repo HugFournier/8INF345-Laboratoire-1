@@ -12,8 +12,19 @@ $(function(){
     let htmlAcc = "";
     htmlAcc += accueilController.getNav();
     htmlAcc += accueilController.getArticles();
+    htmlAcc += getForm();
     body.html(htmlAcc);
 });
+
+//Fonction de test pour un formulaire
+function getForm(): string{
+    return "<div class='container'><form id='testForm'>"+
+    "<div class='form-group'><label for='login'>Pseudo :</label>"+
+    "<input name='login' id='login' type='text' class='form-control' /></div>"+
+    "<div class='form-group'><label for='pwd'>Mot de passe :</label>"+
+    "<input name='pwd' id='pwd' type='text' class='form-control' /></div>"+
+    "<button type='submit' class='btn btn-primary'>Connexion</button></form></div>";
+}
 
 //Récupère les paramètres dans l'URL
 function parseQueryString(queryString: string): Map<string, string> {
