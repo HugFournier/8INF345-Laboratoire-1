@@ -7,15 +7,15 @@ export default class AccueilController {
     }
 
     public getArticles() : string{
-        let html = "<center><table class='table table-hover table-responsive'>";
+        let html = "<table class='table table-hover table-responsive' align='center'>";
         let liArticles = Service.returnArticlesStub();
 
         liArticles.forEach(element => {
             let img = "<img src='"+element.getImage()+"'/>";
-            html += "<tr><td>" + img +"</td><td>"+ element.getLabel() + "</td><td>" + element.getDescription().substring(0, 50) + "...</td><td>CDN$ " + element.getPrix() + "</td><td><button id='addPanier' class='btn btn-primary'>Ajouter au panier</button></td></tr>";
+            html += "<tr><td>" + img +"</td><td>"+ element.getLabel() + "</td><td>" + (element.getDescription().length > 50 ? element.getDescription().substring(0, 47) + "..." : element.getDescription()) + "</td><td>CDN$ " + element.getPrix() + "</td><td><button id='addPanier' class='btn btn-primary'>Ajouter au panier</button></td></tr>";
         });
 
-        return html += "</table></center>";
+        return html += "</table>";
     }
 
     public getNav() : string{
