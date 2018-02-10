@@ -80,15 +80,16 @@ $(function () {
     htmlAcc += accueilController.getNav();
     htmlAcc += accueilController.getArticles();
     body.html(htmlAcc);
-    var uri = parseURL("");
+    //let uri = parseURL("");
+    var uri = parseQueryString("");
     console.log(uri);
 });
-function parseURL(stringUrl) {
-    if (stringUrl == null) {
-        stringUrl = window.location.search.substring(1);
+function parseQueryString(queryString) {
+    if (queryString == null) {
+        queryString = window.location.search.substring(1);
     }
     var params = new Map();
-    var queries = stringUrl.split("&");
+    var queries = queryString.split("&");
     queries.forEach(function (indexQuery) {
         var indexPair = indexQuery.split("=");
         var queryKey = decodeURIComponent(indexPair[0]);
@@ -97,6 +98,26 @@ function parseURL(stringUrl) {
     });
     return params;
 }
+/*function parseURL(stringUrl: string) : Map<string, string> {
+    if(stringUrl == null){
+        stringUrl = window.location.search.substring(1);
+    }
+
+    var params = new Map<string, string>();
+    var queries = stringUrl.split("&");
+
+    queries.forEach((indexQuery: string) => {
+        var indexPair = indexQuery.split("=");
+        console.log(indexPair);
+        var queryKey = decodeURIComponent(indexPair[0]);
+        console.log("qK" + queryKey);
+        var queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
+        console.log("qK" + queryValue);
+        params[queryKey] = queryValue;
+    });
+
+    return params;
+}*/
 
 /***/ }),
 /* 1 */
@@ -10485,7 +10506,7 @@ var AccueilController = /** @class */function () {
         var liArticles = Service_1.default.returnArticlesStub();
         liArticles.forEach(function (element) {
             var img = "<img src='" + element.getImage() + "'/>";
-            html += "<tr><td>" + img + "</td><td>" + element.getLabel() + "</td><td>" + element.getDescription().substring(0, 50) + "...</td><td>CDN$ " + element.getPrix() + "</td><td><button id='addPanier' class='btn btn-primary'>Ajouter au panier</button></td></tr>";
+            html += "<tr><td>" + img + "</td><td>" + element.getLabel() + "</td><td>" + (element.getDescription().length > 50 ? element.getDescription().substring(0, 47) + "..." : element.getDescription()) + "</td><td>CDN$ " + element.getPrix() + "</td><td><button id='addPanier' class='btn btn-primary'>Ajouter au panier</button></td></tr>";
         });
         return html += "</table>";
     };
