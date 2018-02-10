@@ -18,15 +18,12 @@ export default class AccueilController {
         return html += "</table>";
     }
 
-<<<<<<< HEAD
-=======
     private getCodeBoutonAjouterPanier(ID : number) : string {
         let tmp = "<button id='addPanier' idArticle='"+ID+"' class='btn btn-primary'>Ajouter au panier</button>";
         //let btn = $('#addPanier').on('click', this.ajouterPanier(ID));
         return tmp;
     }
 
->>>>>>> 7f521cff6029ca35219051aa31705db7d2ce9acd
     public getNav() : string{
         return "<nav class='navbar navbar-default'>"+
         "<div class='container'><div class='navbar-header'>"+
