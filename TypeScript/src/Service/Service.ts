@@ -1,4 +1,4 @@
-import Article from '../Model/Article';
+import {Article} from '../Model/Article';
 
 export class Service {
     public static returnArticlesStub() : Array<Article> {
