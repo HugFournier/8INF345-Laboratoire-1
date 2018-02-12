@@ -41,8 +41,7 @@ export class AccueilController {
             </nav>`;
     }
 
-    public ajouterPanier(ID : number) : void {
+    public ajouterPanier(ID : string) : void {
         console.log("ok "+ID);
     }
 }
-//export { getArticles, getNav };

@@ -15,6 +15,12 @@ $(function(){
     htmlAcc += getForm();
     body.html(htmlAcc);
     //btn.addEventListener("click", (e:Event) => accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle")));
+    
+    let btn =$('.addPanier').each( (index, elem) => {
+        (<HTMLButtonElement>elem).addEventListener("click", (e:Event)=>{
+            accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle"));
+        });
+    });
 });
 
 //Fonction de test pour un formulaire
