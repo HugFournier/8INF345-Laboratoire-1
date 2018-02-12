@@ -15,7 +15,7 @@ $(function(){
     htmlAcc += getForm();
     body.html(htmlAcc);
     let btn = document.getElementById("addPanier");
-    btn.addEventListener("click", (e:Event) => accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle")));
+    //btn.addEventListener("click", (e:Event) => accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle")));
 });
 
 //Fonction de test pour un formulaire
