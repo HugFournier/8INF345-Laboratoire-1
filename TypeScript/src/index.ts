@@ -14,11 +14,6 @@ $(function(){
     htmlAcc += accueilController.getArticles();
     htmlAcc += getForm();
     body.html(htmlAcc);
-<<<<<<< HEAD
-    //let btn = document.getElementById("addPanier");
-=======
-    let btn = document.getElementById("addPanier");
->>>>>>> 6939dcc58c2364e6638fd85e20b1cc79aa9bf4e8
     //btn.addEventListener("click", (e:Event) => accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle")));
 });
 

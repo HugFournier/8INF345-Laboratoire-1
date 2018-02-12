@@ -21,7 +21,7 @@ export default class AccueilController {
     private getCodeBoutonAjouterPanier(ID : number) : string {
         let tmp = "<button class='addPanier' idArticle='"+ID+"' class='btn btn-primary'>Ajouter au panier</button>";
         let btn =$('.addPanier').each( (index, elem) => {
-            (<HTMLButtonElement>elem).on('click', this.ajouterPanier(ID.toString()));
+            (<HTMLButtonElement>elem).on('click', this.ajouterPanier(ID));
         });
         return tmp;
     }
@@ -33,5 +33,8 @@ export default class AccueilController {
         "<ul class='nav navbar-nav'><li><a>Accueil</a></li><li><a>Home</a></li></ul></div></nav>";
     }
 
+    public ajouterPanier(ID : number) : void {
+        console.log("ok "+ID);
+    }
 }
 //export { getArticles, getNav };
