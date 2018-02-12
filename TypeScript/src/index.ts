@@ -12,10 +12,25 @@ $(function(){
     let htmlAcc = "";
     htmlAcc += accueilController.getNav();
     htmlAcc += accueilController.getArticles();
+    htmlAcc += getForm();
     body.html(htmlAcc);
+<<<<<<< HEAD
     //let btn = document.getElementById("addPanier");
+=======
+    let btn = document.getElementById("addPanier");
+>>>>>>> 6939dcc58c2364e6638fd85e20b1cc79aa9bf4e8
     //btn.addEventListener("click", (e:Event) => accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle")));
 });
+
+//Fonction de test pour un formulaire
+function getForm(): string{
+    return "<div class='container'><form id='testForm'>"+
+    "<div class='form-group'><label for='login'>Pseudo :</label>"+
+    "<input name='login' id='login' type='text' class='form-control' /></div>"+
+    "<div class='form-group'><label for='pwd'>Mot de passe :</label>"+
+    "<input name='pwd' id='pwd' type='text' class='form-control' /></div>"+
+    "<button type='submit' class='btn btn-primary'>Connexion</button></form></div>";
+}
 
 //Récupère les paramètres dans l'URL
 function parseQueryString(queryString: string): Map<string, string> {
