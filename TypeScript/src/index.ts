@@ -13,8 +13,8 @@ $(function(){
     htmlAcc += accueilController.getNav();
     htmlAcc += accueilController.getArticles();
     body.html(htmlAcc);
-    let btn = document.getElementById("addPanier");
-    btn.addEventListener("click", (e:Event) => accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle")));
+    //let btn = document.getElementById("addPanier");
+    //btn.addEventListener("click", (e:Event) => accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle")));
 });
 
 //Récupère les paramètres dans l'URL

@@ -19,8 +19,10 @@ export default class AccueilController {
     }
 
     private getCodeBoutonAjouterPanier(ID : number) : string {
-        let tmp = "<button id='addPanier' idArticle='"+ID+"' class='btn btn-primary'>Ajouter au panier</button>";
-        //let btn = $('#addPanier').on('click', this.ajouterPanier(ID));
+        let tmp = "<button class='addPanier' idArticle='"+ID+"' class='btn btn-primary'>Ajouter au panier</button>";
+        let btn =$('.addPanier').each( (index, elem) => {
+            (<HTMLButtonElement>elem).on('click', this.ajouterPanier(ID.toString()));
+        });
         return tmp;
     }
 

@@ -74,16 +74,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(1);
 var AccueilController_1 = __webpack_require__(2);
 $(function () {
+    var uri = parseQueryString("");
+    console.log(uri);
     var accueilController = new AccueilController_1.default();
     var body = $('body');
     var htmlAcc = "";
     htmlAcc += accueilController.getNav();
     htmlAcc += accueilController.getArticles();
     body.html(htmlAcc);
-    //let uri = parseURL("");
-    var uri = parseQueryString("");
-    console.log(uri);
+    var btn = document.getElementById("addPanier");
+    btn.addEventListener("click", function (e) {
+        return accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle"));
+    });
 });
+//Récupère les paramètres dans l'URL
 function parseQueryString(queryString) {
     if (queryString == null) {
         queryString = window.location.search.substring(1);
@@ -98,26 +102,6 @@ function parseQueryString(queryString) {
     });
     return params;
 }
-/*function parseURL(stringUrl: string) : Map<string, string> {
-    if(stringUrl == null){
-        stringUrl = window.location.search.substring(1);
-    }
-
-    var params = new Map<string, string>();
-    var queries = stringUrl.split("&");
-
-    queries.forEach((indexQuery: string) => {
-        var indexPair = indexQuery.split("=");
-        console.log(indexPair);
-        var queryKey = decodeURIComponent(indexPair[0]);
-        console.log("qK" + queryKey);
-        var queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
-        console.log("qK" + queryValue);
-        params[queryKey] = queryValue;
-    });
-
-    return params;
-}*/
 
 /***/ }),
 /* 1 */
@@ -10502,27 +10486,33 @@ var Service_1 = __webpack_require__(3);
 var AccueilController = /** @class */function () {
     function AccueilController() {}
     AccueilController.prototype.getArticles = function () {
+        var _this = this;
         var html = "<table class='table table-hover table-responsive' align='center'>";
         var liArticles = Service_1.default.returnArticlesStub();
         liArticles.forEach(function (element) {
             var img = "<img src='" + element.getImage() + "'/>";
-            html += "<tr><td>" + img + "</td><td>" + element.getLabel() + "</td><td>" + (element.getDescription().length > 50 ? element.getDescription().substring(0, 47) + "..." : element.getDescription()) + "</td><td>CDN$ " + element.getPrix() + "</td><td><button id='addPanier' class='btn btn-primary'>Ajouter au panier</button></td></tr>";
+            html += "<tr><td>" + img + "</td><td>" + element.getLabel() + "</td><td>" + (element.getDescription().length > 50 ? element.getDescription().substring(0, 47) + "..." : element.getDescription()) + "</td><td>CDN$ " + element.getPrix() + "</td><td>" + _this.getCodeBoutonAjouterPanier(element.getID()) + "</td></tr>";
         });
         return html += "</table>";
+    };
+    AccueilController.prototype.getCodeBoutonAjouterPanier = function (ID) {
+        var tmp = "<button id='addPanier' idArticle='" + ID + "' class='btn btn-primary'>Ajouter au panier</button>";
+        //let btn = $('#addPanier').on('click', this.ajouterPanier(ID));
+        return tmp;
     };
     AccueilController.prototype.getNav = function () {
         var nav = "<nav class='navbar navbar-default'>";
         nav += "<div class='container'><div class='navbar-header'>";
         nav += "<a class='navbar-brand'>Catalogue</a></div>";
         nav += "<ul class='nav navbar-nav'><li><a>Accueil</a></li><li><a>Home</a></li></ul></div></nav>";
-        //return "<nav class='navbar navbar-inverse'><div class='container-fluid'><div class='navbar-header'><a class='navbar-brand'>Catalogue</a></div>
-        //<ul class='nav navbar-nav'><li><a href='#'>Accueil</a></li><li><a href='#'>Page 2</a></li></ul></div></nav>    <div class='container'><h3>Catalogue</h3><p>Bacon ipsum dolor amet swine porchetta drumstick salami, jerky kielbasa brisket buffalo bresaola ground round short ribs pork. Meatball alcatra beef ribs, andouille spare ribs swine short ribs pork picanha jerky ball tip ribeye ham. Short loin shankle rump, turducken fatback filet mignon t-bone short ribs biltong beef ribs tenderloin tail. Meatloaf jowl landjaeger, drumstick tenderloin pork belly burgdoggen chuck bresaola shankle tri-tip. Pork chop rump leberkas corned beef, porchetta filet mignon landjaeger pork belly picanha. Chuck porchetta pastrami turducken pork chop beef ribs. Swine kevin jerky, rump beef ribs prosciutto bacon beef buffalo.</p></div>";
         return nav;
+    };
+    AccueilController.prototype.ajouterPanier = function (ID) {
+        console.log(ID);
     };
     return AccueilController;
 }();
 exports.default = AccueilController;
-//export { getArticles, getNav };
 
 /***/ }),
 /* 3 */
@@ -10536,7 +10526,7 @@ var Article_1 = __webpack_require__(4);
 var Service = /** @class */function () {
     function Service() {}
     Service.returnArticlesStub = function () {
-        return [new Article_1.default("Aspirateur 300", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 16, "http://lorempixel.com/200/200"), new Article_1.default("Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 20, "http://lorempixel.com/200/200"), new Article_1.default("Aspirateur 300", "blablabla", 30, "http://lorempixel.com/200/200"), new Article_1.default("Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 40, "http://lorempixel.com/200/200")];
+        return [new Article_1.default(0, "Aspirateur 300", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 16, "http://lorempixel.com/200/200"), new Article_1.default(1, "Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 20, "http://lorempixel.com/200/200"), new Article_1.default(2, "Aspirateur 300", "blablabla", 30, "http://lorempixel.com/200/200"), new Article_1.default(3, "Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 40, "http://lorempixel.com/200/200")];
     };
     return Service;
 }();
@@ -10551,13 +10541,17 @@ exports.default = Service;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var Article = /** @class */function () {
-    function Article(label, description, prix, image) {
+    function Article(ID, label, description, prix, image) {
+        this.ID = ID;
         this.label = label;
         this.description = description;
         this.prix = prix;
         this.image = new URL(image);
     }
     ;
+    Article.prototype.getID = function () {
+        return this.ID;
+    };
     Article.prototype.getLabel = function () {
         return this.label;
     };
