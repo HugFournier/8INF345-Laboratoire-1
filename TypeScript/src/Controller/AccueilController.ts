@@ -1,6 +1,6 @@
-import Service from '../Service/Service';
+import {Service} from '../Service/Service';
 
-export default class AccueilController {
+export class AccueilController {
 
     public constructor(){
 
@@ -20,17 +20,25 @@ export default class AccueilController {
 
     private getCodeBoutonAjouterPanier(ID : number) : string {
         let tmp = "<button class='addPanier' idArticle='"+ID+"' class='btn btn-primary'>Ajouter au panier</button>";
-        let btn =$('.addPanier').each( (index, elem) => {
+        /*let btn =$('.addPanier').each( (index, elem) => {
             (<HTMLButtonElement>elem).on('click', this.ajouterPanier(ID));
-        });
+        });*/
         return tmp;
     }
 
     public getNav() : string{
-        return "<nav class='navbar navbar-default'>"+
-        "<div class='container'><div class='navbar-header'>"+
-        "<a class='navbar-brand'>Catalogue</a></div>"+
-        "<ul class='nav navbar-nav'><li><a>Accueil</a></li><li><a>Home</a></li></ul></div></nav>";
+        return `
+            <nav class='navbar navbar-default'>
+                <div class='container'>
+                    <div class='navbar-header'>
+                        <a class='navbar-brand'>Catalogue</a>
+                    </div>
+                    <ul class='nav navbar-nav'>
+                        <li><a>Accueil</a></li>
+                        <li><a>Home</a></li>
+                    </ul>
+                    </div>
+            </nav>`;
     }
 
     public ajouterPanier(ID : number) : void {

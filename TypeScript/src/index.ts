@@ -1,7 +1,7 @@
 import * as $ from 'jquery';
-import Article from './Model/Article';
-import Service from './Service/Service';
-import AccueilController from './Controller/AccueilController';
+import {Article} from './Model/Article';
+import {Service} from './Service/Service';
+import {AccueilController} from './Controller/AccueilController';
 import { url } from 'inspector';
 
 $(function(){
