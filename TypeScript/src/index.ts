@@ -3,34 +3,54 @@ import {Article} from './Model/Article';
 import {Service} from './Service/Service';
 import {AccueilController} from './Controller/AccueilController';
 import { url } from 'inspector';
+import { PanierController } from './Controller/PanierController';
+import * as ts from "typescript";
+import { IController } from './Controller/IController';
 
 $(function(){
-    let uri = parseQueryString("");
-    console.log(uri);
-    let accueilController = new AccueilController();
-    let body = $('body');
-    let htmlAcc = "";
-    htmlAcc += accueilController.getNav();
-    htmlAcc += accueilController.getArticles();
-    htmlAcc += getForm();
-    body.html(htmlAcc);
-    //btn.addEventListener("click", (e:Event) => accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle")));
-    
-    let btn =$('.addPanier').each( (index, elem) => {
-        (<HTMLButtonElement>elem).addEventListener("click", (e:Event)=>{
-            accueilController.ajouterPanier(e.srcElement.getAttribute("idArticle"));
-        });
-    });
+    //Récupération des paramètres URL
+    let uri = parseQueryString(null);
+
+    let controller: IController;
+
+    if(uri['view'] === "Panier"){
+        controller = new PanierController();
+    }
+    else if (uri['view'] === "Accueil") {
+        controller = new AccueilController();
+    }
+    controller.display();
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Fonction de test pour un formulaire
 function getForm(): string{
-    return "<div class='container'><form id='testForm'>"+
-    "<div class='form-group'><label for='login'>Pseudo :</label>"+
-    "<input name='login' id='login' type='text' class='form-control' /></div>"+
-    "<div class='form-group'><label for='pwd'>Mot de passe :</label>"+
-    "<input name='pwd' id='pwd' type='text' class='form-control' /></div>"+
-    "<button type='submit' class='btn btn-primary'>Connexion</button></form></div>";
+    return `
+        <div class='container'>
+            <form id='LoginForm'>
+                <div class='form-group'>
+                    <label for='login'>Pseudo :</label>
+                    <input name='login' id='login' type='text' class='form-control' />
+                </div>
+                <div class='form-group'>
+                    <label for='pwd'>Mot de passe :</label>
+                    <input name='pwd' id='pwd' type='text' class='form-control' />
+                </div>
+                <button type='submit' class='btn btn-primary'>Connexion</button>
+            </form>
+        </div>`;
 }
 
 //Récupère les paramètres dans l'URL

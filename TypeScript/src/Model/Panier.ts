@@ -1,30 +1,30 @@
 import {Article} from "./Article";
+import {ArticlePanier} from "./ArticlePanier"; 
 
 export class Panier{
 
-    private items:ItemPanier[] = new Array();
+    private items:ArticlePanier[];
+    private static instancePanier: Panier = null;
 
-}
-
-export class ItemPanier {
-    private article: Article;
-    private quantite: number;
-
-    public constructor(article: Article, quantite: number){
-        this.article = article;
-        this.quantite = quantite;
+    private constructor(){
+        this.items = new Array();
     }
 
-    public getArticle(){
-        return this.article;
+    static getInstancePanier(): Panier{
+        if(!Panier.instancePanier){
+            Panier.instancePanier = new Panier();
+        }
+        return Panier.instancePanier;
     }
 
-    public getQuantite(){
-        return this.quantite;
+    public addItem(article: Article){
+        let articlePanier: ArticlePanier = this.items.find(articlePanier => articlePanier.getArticle() === article);
+        if(articlePanier == undefined){
+            this.items.push(new ArticlePanier(article, 1));
+            console.log("item"+this.items);
+        } else {
+            articlePanier.setQuantite(articlePanier.getQuantite() + 1);
+        }
     }
 
-    public setQuantite(value: number){
-        this.quantite = value;
-    }
-    
 }
