@@ -14,7 +14,7 @@ export class AccueilController implements IController{
     //Génère l'html pour afficher l'accueil
     public generateTableauHTMLArticles() : string{
         let html = "<div class='container'><table class='table table-hover table-responsive'>";
-        let liArticles = Service.returnArticlesStub();
+        let liArticles = new Service().returnArticlesStub();
         liArticles.forEach(element => {
             html += generateHTMLArticle(element);
         });

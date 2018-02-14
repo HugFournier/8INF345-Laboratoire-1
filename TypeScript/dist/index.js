@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10455,23 +10455,83 @@ exports.getNav = getNav;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var Article_1 = __webpack_require__(6);
+var Service = /** @class */function () {
+    function Service() {}
+    Service.prototype.returnArticlesStub = function () {
+        return Service.listeArticlesStub;
+    };
+    Service.prototype.getArticleParID = function (id) {
+        return Service.listeArticlesStub.find(function (e) {
+            return e.getID() == id;
+        });
+    };
+    Service.listeArticlesStub = [new Article_1.Article(0, "Aspirateur 300", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 16, "http://lorempixel.com/200/200"), new Article_1.Article(1, "Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 20, "http://lorempixel.com/200/200"), new Article_1.Article(2, "Aspirateur 300", "blablabla", 30, "http://lorempixel.com/200/200"), new Article_1.Article(3, "Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 40, "http://lorempixel.com/200/200")];
+    return Service;
+}();
+exports.Service = Service;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
+var Service_1 = __webpack_require__(2);
+var ViewMenu_1 = __webpack_require__(1);
+var ViewAdmin_1 = __webpack_require__(13);
+var AdminController = /** @class */function () {
+    function AdminController() {}
+    AdminController.prototype.display = function () {
+        var body = $('body');
+        var htmlAdmin = ViewMenu_1.getNav();
+        htmlAdmin += ViewAdmin_1.getEnTeteTableau();
+        htmlAdmin += this.generateTableauArticleAdmin();
+        htmlAdmin += ViewAdmin_1.getBasTableau();
+        body.html(htmlAdmin);
+    };
+    AdminController.prototype.generateTableauArticleAdmin = function () {
+        var html;
+        var liArticles = new Service_1.Service().returnArticlesStub();
+        liArticles.forEach(function (article) {
+            html += ViewAdmin_1.generateArticleAdmin(article);
+        });
+        return html;
+    };
+    return AdminController;
+}();
+exports.AdminController = AdminController;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
 //#region import
 var $ = __webpack_require__(0);
-var AccueilController_1 = __webpack_require__(3);
-var PanierController_1 = __webpack_require__(7);
-var LoginController_1 = __webpack_require__(10);
+var AccueilController_1 = __webpack_require__(5);
+var PanierController_1 = __webpack_require__(10);
+var LoginController_1 = __webpack_require__(11);
+var AdminController_1 = __webpack_require__(3);
 //#endregion
 $(function () {
     //Récupération des paramètres URL
     var uri = parseQueryString(null);
     var controller;
-    if (uri['view'] === "Panier") {
-        controller = new PanierController_1.PanierController();
-    } else if (uri['view'] === "Accueil" || uri['view'] == null) {
+    if (uri['view'] === "Accueil" || uri['view'] == null) {
         controller = new AccueilController_1.AccueilController();
+    } else if (uri['view'] === "Panier") {
+        controller = new PanierController_1.PanierController();
     } else if (uri['view'] === "Login") {
         controller = new LoginController_1.LoginController();
-        console.log("login");
+    } else if (uri['view'] === "Admin") {
+        controller = new AdminController_1.AdminController();
     }
     controller.display();
 });
@@ -10495,7 +10555,7 @@ function parseQueryString(queryString) {
 }
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10503,19 +10563,20 @@ function parseQueryString(queryString) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
-var Service_1 = __webpack_require__(4);
+var Service_1 = __webpack_require__(2);
 var ViewMenu_1 = __webpack_require__(1);
-var ViewArticle_1 = __webpack_require__(6);
+var ViewArticle_1 = __webpack_require__(7);
+var Panier_1 = __webpack_require__(8);
 var AccueilController = /** @class */function () {
     function AccueilController() {}
-    //Génre l'html pour afficher l'accueil
+    //Génère l'html pour afficher l'accueil
     AccueilController.prototype.generateTableauHTMLArticles = function () {
-        var html = "<table class='table table-hover table-responsive' align='center'>";
-        var liArticles = Service_1.Service.returnArticlesStub();
+        var html = "<div class='container'><table class='table table-hover table-responsive'>";
+        var liArticles = new Service_1.Service().returnArticlesStub();
         liArticles.forEach(function (element) {
             html += ViewArticle_1.generateHTMLArticle(element);
         });
-        return html += "</table>";
+        return html += "</table></div>";
     };
     AccueilController.prototype.display = function () {
         var body = $('body');
@@ -10526,7 +10587,10 @@ var AccueilController = /** @class */function () {
     };
     AccueilController.prototype.chargerEventBouton = function () {
         var btn = $('.addPanier').on('click', function (event) {
-            alert("btn");
+            var id = +event.currentTarget.getAttribute("idArticle");
+            alert(id + " ajouté");
+            var p = new Panier_1.Panier();
+            p.addItem(id);
         });
     };
     return AccueilController;
@@ -10534,25 +10598,7 @@ var AccueilController = /** @class */function () {
 exports.AccueilController = AccueilController;
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var Article_1 = __webpack_require__(5);
-var Service = /** @class */function () {
-    function Service() {}
-    Service.returnArticlesStub = function () {
-        return [new Article_1.Article(0, "Aspirateur 300", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 16, "http://lorempixel.com/200/200"), new Article_1.Article(1, "Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 20, "http://lorempixel.com/200/200"), new Article_1.Article(2, "Aspirateur 300", "blablabla", 30, "http://lorempixel.com/200/200"), new Article_1.Article(3, "Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 40, "http://lorempixel.com/200/200")];
-    };
-    return Service;
-}();
-exports.Service = Service;
-
-/***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10591,7 +10637,7 @@ var Article = /** @class */function () {
 exports.Article = Article;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10602,41 +10648,13 @@ function generateHTMLArticle(element, isDetailed) {
     if (isDetailed === void 0) {
         isDetailed = false;
     }
-    return " \n        <tr>\n            <td><img src=\"" + element.getImage() + "\"/></td>\n            <td> " + element.getLabel() + " </td>\n            <td>" + (element.getDescription().length > 28 && !isDetailed ? element.getDescription().substring(0, 25) + "..." : element.getDescription()) + "</td>\n            <td>CDN$  " + element.getPrix() + " </td>\n            <td>" + getBoutonAjouterPanier(element) + "</td>\n        </tr>\n    ";
+    return " \n        <tr>\n            <td><img src=\"" + element.getImage() + "\"/></td>\n            <td> " + element.getLabel() + " </td>\n            <td>" + (element.getDescription().length > 28 && !isDetailed ? element.getDescription().substring(0, 25) + "..." : element.getDescription()) + "</td>\n            <td>" + element.getPrix() + " $</td>\n            <td>" + getBoutonAjouterPanier(element.getID()) + "</td>\n        </tr>\n    ";
 }
 exports.generateHTMLArticle = generateHTMLArticle;
-function getBoutonAjouterPanier(article) {
+function getBoutonAjouterPanier(id) {
     //return `<button class="btn btn-primary addPanier" onClick="${Panier.getInstancePanier().addItem(article)}">Ajouter au panier</button>`;
-    return "<button class=\"btn btn-primary addPanier\">Ajouter au panier</button>";
+    return "<button idArticle=\"" + id + "\" class=\"btn btn-primary addPanier\">Ajouter au panier</button>";
 }
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(0);
-var ViewMenu_1 = __webpack_require__(1);
-var Panier_1 = __webpack_require__(8);
-var PanierController = /** @class */function () {
-    function PanierController() {}
-    PanierController.prototype.display = function () {
-        var body = $('body');
-        var htmlAcc = ViewMenu_1.getNav();
-        htmlAcc += this.getPanier();
-        body.html(htmlAcc);
-        console.log(Panier_1.Panier.getInstancePanier());
-    };
-    //Génere l'html pour afficher le panier
-    PanierController.prototype.getPanier = function () {
-        return "\n\t\t\t<div class=\"container\">\n\t\t\t\t<table class=\"table table-responsive\">\n\t\t\t\t\t<thead>\n\t\t\t\t\t\t<tr>\n                        <th style=\"width:50%\">Article</th>\n                        <th style=\"width:10%\">Prix</th>\n                        <th style=\"width:10%\">Quantit\u00E9e</th>\n                        <th style=\"width:25%\">Sous-Total</th>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</thead>\n\t\t\t\t</table>\n\t\t\t</div>\n\t\t";
-    };
-    return PanierController;
-}();
-exports.PanierController = PanierController;
 
 /***/ }),
 /* 8 */
@@ -10647,17 +10665,13 @@ exports.PanierController = PanierController;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var ArticlePanier_1 = __webpack_require__(9);
+var Service_1 = __webpack_require__(2);
 var Panier = /** @class */function () {
     function Panier() {
         this.items = new Array();
     }
-    Panier.getInstancePanier = function () {
-        if (!Panier.instancePanier) {
-            Panier.instancePanier = new Panier();
-        }
-        return Panier.instancePanier;
-    };
-    Panier.prototype.addItem = function (article) {
+    Panier.prototype.addItem = function (id) {
+        var article = new Service_1.Service().getArticleParID(id);
         var articlePanier = this.items.find(function (articlePanier) {
             return articlePanier.getArticle() === article;
         });
@@ -10668,7 +10682,6 @@ var Panier = /** @class */function () {
             articlePanier.setQuantite(articlePanier.getQuantite() + 1);
         }
     };
-    Panier.instancePanier = null;
     return Panier;
 }();
 exports.Panier = Panier;
@@ -10712,8 +10725,36 @@ exports.ArticlePanier = ArticlePanier;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
-var ViewLogin_1 = __webpack_require__(11);
 var ViewMenu_1 = __webpack_require__(1);
+var PanierController = /** @class */function () {
+    function PanierController() {}
+    PanierController.prototype.display = function () {
+        var body = $('body');
+        var htmlAcc = ViewMenu_1.getNav();
+        htmlAcc += this.getPanier();
+        body.html(htmlAcc);
+        console.log("nada");
+    };
+    //Génere l'html pour afficher le panier
+    PanierController.prototype.getPanier = function () {
+        return "\n\t\t\t<div class=\"container\">\n\t\t\t\t<table class=\"table table-responsive\">\n\t\t\t\t\t<thead>\n\t\t\t\t\t\t<tr>\n                        <th style=\"width:50%\">Article</th>\n                        <th style=\"width:10%\">Prix</th>\n                        <th style=\"width:10%\">Quantit\u00E9e</th>\n                        <th style=\"width:25%\">Sous-Total</th>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</thead>\n\t\t\t\t</table>\n\t\t\t</div>\n\t\t";
+    };
+    return PanierController;
+}();
+exports.PanierController = PanierController;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
+var ViewLogin_1 = __webpack_require__(12);
+var ViewMenu_1 = __webpack_require__(1);
+var AdminController_1 = __webpack_require__(3);
 var LoginController = /** @class */function () {
     function LoginController() {}
     LoginController.prototype.display = function () {
@@ -10723,7 +10764,8 @@ var LoginController = /** @class */function () {
         body.html(htmlAcc);
         var btnLogin = $('#loginButton').on('click', function (event) {
             if ($('#login').val() == "admin" && $('#pwd').val() == "admin") {
-                alert("Vous êtes connecté !");
+                var controller = new AdminController_1.AdminController();
+                controller.display();
             } else {
                 htmlAcc += "\n                    <div class=\"container\">\n                        <p class=\"text-center\" style=\"color:red;\">Identifiant ou mot de passe incorrect</p>\n                    </div>\n                ";
                 body.html(htmlAcc);
@@ -10735,7 +10777,7 @@ var LoginController = /** @class */function () {
 exports.LoginController = LoginController;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10746,6 +10788,30 @@ function generateHTMLFormLogin() {
     return "\n        <div class=\"container\">\n            <form id=\"LoginForm\">\n                <div class=\"form-group\">\n                    <label for=\"login\">Identifiant :</label>\n                    <input name=\"login\" id=\"login\" type=\"text\" class=\"form-control\" placeholder=\"Identifiant\" required/>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"pwd\">Mot de passe :</label>\n                    <input name=\"pwd\" id=\"pwd\" type=\"password\" class=\"form-control\" placeholder=\"Mot de passe\" required/>\n                </div>\n                <button type=\"submit\" class=\"btn btn-primary\" id=\"loginButton\">Connexion</button>\n            </form>\n        </div>";
 }
 exports.generateHTMLFormLogin = generateHTMLFormLogin;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+//Génère l'HTML pour l'entête du tableau du panneau d'administration
+function getEnTeteTableau() {
+    return "\n        <div class=\"container\">\n            <h1>Panneau d'administration</h1>\n            <table class=\"table table-responsive\">\n                <thead>\n                    <tr>\n                        <th style=\"width:25%\">Nom</th>\n                        <th style=\"width:55%\">Description</th>\n                        <th style=\"width:10%\">Prix</th>\n                        <th style=\"width:20%\">Action</th>\n                    </tr>\n                </thead>\n                <tbody>\n    ";
+}
+exports.getEnTeteTableau = getEnTeteTableau;
+//Génère l'HTML pour un article passé en paramètre
+function generateArticleAdmin(article) {
+    return "\n    <tr>\n        <td><input type=\"text\" class=\"form-control\" value=\"" + article.getLabel() + "\"></td>\n        <td><input type=\"text\" class=\"form-control\" value=\"" + article.getDescription() + "\"></td>\n        <td><input type=\"number\" class=\"form-control\" value=\"" + article.getPrix() + "\"></td>\n        <td>\n            <button class=\"btn btn-success\">+</button>\n            <button class=\"btn btn-danger\">-</button>\n        </td>\n    </tr>\n    ";
+}
+exports.generateArticleAdmin = generateArticleAdmin;
+//Génère l'HTML pour les dernières lignes du tableau du panneau d'administration
+function getBasTableau() {
+    return "\n        <tr>\n            <td><input type=\"text\" class=\"form-control\" placeholder=\"Nom de l'article\"></td>\n            <td><input type=\"text\" class=\"form-control\" placeholder=\"Description\"></td>\n            <td><input type=\"number\" class=\"form-control\" placeholder=\"Prix\"></td>\n            <td>\n                <button id=\"ajouterArticleAdmin\" class=\"btn btn-success\">Ajouter</button>\n            </td>\n        </tr>\n        </tbody>\n        <tfoot>\n            <tr>\n                <td><a href=\"?\" class=\"btn btn-warning\">Retour</a></td>\n            </tr>\n        </tfoot>\n        </table>\n        </div>\n    ";
+}
+exports.getBasTableau = getBasTableau;
 
 /***/ })
 /******/ ]);
