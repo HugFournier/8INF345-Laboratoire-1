@@ -21,4 +21,7 @@ export class Panier{
         }
     }
 
+    public getArticlesPanier() : ArticlePanier[]{
+        return this.items;
+    }
 }
