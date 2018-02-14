@@ -25,5 +25,12 @@ export class AccueilController implements IController{
         let htmlAcc = getNav();
         htmlAcc += this.generateTableauHTMLArticles();
         body.html(htmlAcc);
+        this.chargerEventBouton();
+    }
+
+    private chargerEventBouton(){
+        let btn = $('.addPanier').on('click', function(event){
+            alert("btn");
+        });
     }
 }
