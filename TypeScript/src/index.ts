@@ -8,6 +8,7 @@ import { PanierController } from './Controller/PanierController';
 import * as ts from "typescript";
 import { IController } from './Controller/IController';
 import { LoginController } from './Controller/LoginController';
+import { AdminController } from './Controller/AdminController';
 //#endregion
 
 $(function(){
@@ -16,14 +17,15 @@ $(function(){
 
     let controller: IController;
 
-    if(uri['view'] === "Panier"){
-        controller = new PanierController();
-    }
-    else if (uri['view'] === "Accueil" || uri['view'] == null) {
+    if (uri['view'] === "Accueil" || uri['view'] == null){
         controller = new AccueilController();
+    }
+    else if(uri['view'] === "Panier") {
+        controller = new PanierController();
     } else if (uri['view'] === "Login"){
         controller = new LoginController();
-        console.log("login");
+    } else if (uri['view'] === "Admin"){
+        controller = new AdminController();
     }
     controller.display();
 

@@ -2,6 +2,7 @@ import * as $ from 'jquery';
 import { IController } from "./IController";
 import {generateHTMLFormLogin} from '../View/ViewLogin';
 import {getNav} from '../View/ViewMenu';
+import { AdminController } from './AdminController';
 
 export class LoginController implements IController{
 
@@ -12,7 +13,8 @@ export class LoginController implements IController{
         body.html(htmlAcc);
         let btnLogin = $('#loginButton').on('click', function(event){
             if($('#login').val() == "admin" && $('#pwd').val() == "admin"){
-                alert("Vous êtes connecté !");
+                let controller = new AdminController();
+                controller.display();
             } else {
                 htmlAcc += `
                     <div class="container">
