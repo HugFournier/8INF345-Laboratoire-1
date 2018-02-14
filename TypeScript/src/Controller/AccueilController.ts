@@ -4,6 +4,7 @@ import {getNav} from '../View/ViewMenu';
 import { IController } from './IController';
 import {generateHTMLArticle} from '../View/ViewArticle';
 import { Panier } from '../Model/Panier';
+import { PanierController } from './PanierController';
 
 export class AccueilController implements IController{
 
@@ -32,9 +33,8 @@ export class AccueilController implements IController{
     private chargerEventBouton(){
         let btn = $('.addPanier').on('click', function(event){
             let id:number = +event.currentTarget.getAttribute("idArticle");
-            alert(id + " ajouté");
-            let p:Panier = new Panier();
-            p.addItem(id);
+            let CPanier:PanierController = new PanierController();
+            CPanier.addArticleParID(id);
         });
     }
 }
