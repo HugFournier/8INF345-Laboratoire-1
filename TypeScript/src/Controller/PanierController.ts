@@ -26,5 +26,15 @@ export class PanierController implements IController{
 		panier.addItem(id);
 		stockage.add('panier', panier);
 	}
+
+	public getPanier(): Panier{
+		let stockage : LocalStorageWorker = new LocalStorageWorker();
+		let panier:Panier = stockage.get('panier');
+		if(panier == null){
+			panier = new Panier();
+			stockage.add("panier",panier);
+		}
+		return panier;
+	}
 	
 }
