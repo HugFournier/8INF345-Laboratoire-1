@@ -12,12 +12,12 @@ export class AccueilController implements IController{
 
     //Génre l'html pour afficher l'accueil
     public generateTableauHTMLArticles() : string{
-        let html = "<table class='table table-hover table-responsive' align='center'>";
+        let html = "<div class='container'><table class='table table-hover table-responsive'>";
         let liArticles = Service.returnArticlesStub();
         liArticles.forEach(element => {
             html += generateHTMLArticle(element);
         });
-        return html += "</table>";
+        return html += "</table></div>";
     }
 
     public display(){
