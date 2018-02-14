@@ -27,7 +27,7 @@ export class LocalStorageWorker {
     }
 
     // add value to storage
-    add(key: string, item: any) {
+    add(key: string, item: string) {
         if (this.localStorageSupported) {
             localStorage.setItem(key, item);
         }
@@ -65,7 +65,7 @@ export class LocalStorageWorker {
     }
 
     // get one item by key from storage
-    get(key: string): any {
+    get(key: string): string {
         if (this.localStorageSupported) {
             var item = localStorage.getItem(key);
             return item;
