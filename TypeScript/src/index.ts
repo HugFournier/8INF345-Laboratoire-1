@@ -21,12 +21,12 @@ $(function(){
     }
     else if (uri['view'] === "Accueil" || uri['view'] == null) {
         controller = new AccueilController();
-    } else if (uri['view'] === "Login"){
+    }
+    else if (uri['view'] === "Login"){
         controller = new LoginController();
         console.log("login");
     }
     controller.display();
-
 });
 
 /*

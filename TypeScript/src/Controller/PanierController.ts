@@ -14,7 +14,7 @@ export class PanierController implements IController{
         let htmlAcc = getNav();
 		htmlAcc += this.getPanier();
 		body.html(htmlAcc);
-		console.log(Panier.getInstancePanier());
+		console.log("nada");
 	}
 
 	//Génere l'html pour afficher le panier

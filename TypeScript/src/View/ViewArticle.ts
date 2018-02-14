@@ -9,13 +9,13 @@ export function generateHTMLArticle(element: Article, isDetailed: boolean = fals
             <td><img src="${element.getImage()}"/></td>
             <td> ${element.getLabel()} </td>
             <td>${(element.getDescription().length > 28 && !isDetailed ? element.getDescription().substring(0, 25) + "..." : element.getDescription())}</td>
-            <td>CDN$  ${element.getPrix()} </td>
-            <td>${getBoutonAjouterPanier(element)}</td>
+            <td>${element.getPrix()} $</td>
+            <td>${getBoutonAjouterPanier(element.getID())}</td>
         </tr>
     `;
 }
 
-function getBoutonAjouterPanier(article: Article): string{
+function getBoutonAjouterPanier(id: number): string{
     //return `<button class="btn btn-primary addPanier" onClick="${Panier.getInstancePanier().addItem(article)}">Ajouter au panier</button>`;
-    return `<button class="btn btn-primary addPanier">Ajouter au panier</button>`;
+    return `<button idArticle="${id}" class="btn btn-primary addPanier">Ajouter au panier</button>`;
 }
