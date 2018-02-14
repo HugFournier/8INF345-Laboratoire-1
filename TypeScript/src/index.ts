@@ -28,7 +28,6 @@ $(function(){
         controller = new AdminController();
     }
     controller.display();
-
 });
 
 /*
