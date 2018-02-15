@@ -19,7 +19,7 @@ export class PanierController implements IController{
 
 	public addArticleParID(id:number){
 		let stockage : LocalStorageWorker = new LocalStorageWorker();
-		let panier:Panier = JSON.parse(stockage.get("panier"));
+		let panier:Panier = <Panier>JSON.parse(stockage.get("panier"));
 		if(panier == null){
 			panier = new Panier();
 		} else {
@@ -31,7 +31,8 @@ export class PanierController implements IController{
 
 	public getPanier(): Panier{
 		let stockage : LocalStorageWorker = new LocalStorageWorker();
-		let panier:Panier = JSON.parse(stockage.get('panier'));
+		console.log(stockage.get('panier'));
+		let panier:Panier =<Panier> JSON.parse(stockage.get('panier'));
 		if(panier == null){
 			panier = new Panier();
 			stockage.add("panier", JSON.stringify(panier));

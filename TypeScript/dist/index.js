@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10455,7 +10455,7 @@ exports.getNav = getNav;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Article_1 = __webpack_require__(6);
+var Article_1 = __webpack_require__(7);
 var Service = /** @class */function () {
     function Service() {}
     Service.prototype.returnArticlesStub = function () {
@@ -10480,9 +10480,61 @@ exports.Service = Service;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
+var ViewMenu_1 = __webpack_require__(1);
+var Panier_1 = __webpack_require__(9);
+var ViewPanier_1 = __webpack_require__(11);
+var StorageHelper_1 = __webpack_require__(12);
+var PanierController = /** @class */function () {
+    function PanierController() {}
+    PanierController.prototype.display = function () {
+        var body = $('body');
+        var htmlPanier = ViewMenu_1.getNav();
+        var panier = this.getPanier();
+        htmlPanier += ViewPanier_1.getEntetePanier();
+        panier.getArticlesPanier().forEach(function (e) {
+            return htmlPanier += ViewPanier_1.generateHTMLArticlePanier(e);
+        });
+        htmlPanier += ViewPanier_1.getBasPanier();
+        body.html(htmlPanier);
+    };
+    PanierController.prototype.addArticleParID = function (id) {
+        var stockage = new StorageHelper_1.LocalStorageWorker();
+        var panier = JSON.parse(stockage.get("panier"));
+        if (panier == null) {
+            panier = new Panier_1.Panier();
+        } else {
+            stockage.remove("panier");
+        }
+        panier.addItem(id);
+        stockage.add('panier', JSON.stringify(panier));
+    };
+    PanierController.prototype.getPanier = function () {
+        var stockage = new StorageHelper_1.LocalStorageWorker();
+        console.log(stockage.get('panier'));
+        var panier = JSON.parse(stockage.get('panier'));
+        if (panier == null) {
+            panier = new Panier_1.Panier();
+            stockage.add("panier", JSON.stringify(panier));
+        }
+        console.log(panier);
+        return panier;
+    };
+    return PanierController;
+}();
+exports.PanierController = PanierController;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
 var Service_1 = __webpack_require__(2);
 var ViewMenu_1 = __webpack_require__(1);
-var ViewAdmin_1 = __webpack_require__(13);
+var ViewAdmin_1 = __webpack_require__(15);
 var AdminController = /** @class */function () {
     function AdminController() {}
     AdminController.prototype.display = function () {
@@ -10506,7 +10558,7 @@ var AdminController = /** @class */function () {
 exports.AdminController = AdminController;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10515,10 +10567,10 @@ exports.AdminController = AdminController;
 Object.defineProperty(exports, "__esModule", { value: true });
 //#region import
 var $ = __webpack_require__(0);
-var AccueilController_1 = __webpack_require__(5);
-var PanierController_1 = __webpack_require__(10);
-var LoginController_1 = __webpack_require__(11);
-var AdminController_1 = __webpack_require__(3);
+var AccueilController_1 = __webpack_require__(6);
+var PanierController_1 = __webpack_require__(3);
+var LoginController_1 = __webpack_require__(13);
+var AdminController_1 = __webpack_require__(4);
 //#endregion
 $(function () {
     //Récupération des paramètres URL
@@ -10555,7 +10607,7 @@ function parseQueryString(queryString) {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10565,8 +10617,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
 var Service_1 = __webpack_require__(2);
 var ViewMenu_1 = __webpack_require__(1);
-var ViewArticle_1 = __webpack_require__(7);
-var Panier_1 = __webpack_require__(8);
+var ViewArticle_1 = __webpack_require__(8);
+var PanierController_1 = __webpack_require__(3);
 var AccueilController = /** @class */function () {
     function AccueilController() {}
     //Génère l'html pour afficher l'accueil
@@ -10588,9 +10640,8 @@ var AccueilController = /** @class */function () {
     AccueilController.prototype.chargerEventBouton = function () {
         var btn = $('.addPanier').on('click', function (event) {
             var id = +event.currentTarget.getAttribute("idArticle");
-            alert(id + " ajouté");
-            var p = new Panier_1.Panier();
-            p.addItem(id);
+            var CPanier = new PanierController_1.PanierController();
+            CPanier.addArticleParID(id);
         });
     };
     return AccueilController;
@@ -10598,7 +10649,7 @@ var AccueilController = /** @class */function () {
 exports.AccueilController = AccueilController;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10637,7 +10688,7 @@ var Article = /** @class */function () {
 exports.Article = Article;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10657,14 +10708,14 @@ function getBoutonAjouterPanier(id) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var ArticlePanier_1 = __webpack_require__(9);
+var ArticlePanier_1 = __webpack_require__(10);
 var Service_1 = __webpack_require__(2);
 var Panier = /** @class */function () {
     function Panier() {
@@ -10682,12 +10733,15 @@ var Panier = /** @class */function () {
             articlePanier.setQuantite(articlePanier.getQuantite() + 1);
         }
     };
+    Panier.prototype.getArticlesPanier = function () {
+        return this.items;
+    };
     return Panier;
 }();
 exports.Panier = Panier;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10717,33 +10771,6 @@ var ArticlePanier = /** @class */function () {
 exports.ArticlePanier = ArticlePanier;
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(0);
-var ViewMenu_1 = __webpack_require__(1);
-var PanierController = /** @class */function () {
-    function PanierController() {}
-    PanierController.prototype.display = function () {
-        var body = $('body');
-        var htmlAcc = ViewMenu_1.getNav();
-        htmlAcc += this.getPanier();
-        body.html(htmlAcc);
-        console.log("nada");
-    };
-    //Génere l'html pour afficher le panier
-    PanierController.prototype.getPanier = function () {
-        return "\n\t\t\t<div class=\"container\">\n\t\t\t\t<table class=\"table table-responsive\">\n\t\t\t\t\t<thead>\n\t\t\t\t\t\t<tr>\n                        <th style=\"width:50%\">Article</th>\n                        <th style=\"width:10%\">Prix</th>\n                        <th style=\"width:10%\">Quantit\u00E9e</th>\n                        <th style=\"width:25%\">Sous-Total</th>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</thead>\n\t\t\t\t</table>\n\t\t\t</div>\n\t\t";
-    };
-    return PanierController;
-}();
-exports.PanierController = PanierController;
-
-/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10751,10 +10778,107 @@ exports.PanierController = PanierController;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+function getEntetePanier() {
+    return "\n    <div class=\"container\">\n        <table class=\"table table-responsive\">\n            <thead>\n                <tr>\n                    <th style=\"width:50%\">Article</th>\n                    <th style=\"width:10%\">Prix</th>\n                    <th style=\"width:10%\">Quantit\u00E9e</th>\n                    <th style=\"width:25%\">Sous-Total</th>\n                    <th style=\"width:10%\"><th>\n                </tr>\n            </thead>\n            <tbody>\n    ";
+}
+exports.getEntetePanier = getEntetePanier;
+function generateHTMLArticlePanier(articlepanier) {
+    return "\n        <tr>\n            <td>\n                <div class=\"row\">\n                    <div class=\"col-sm-3\">\n                        <img src=\"" + articlepanier.getArticle().getImage() + "\" class=\"img-responsive\"/>\n                    </div>\n                    <div class=\"col-sm-10\">\n                        <h3>" + articlepanier.getArticle().getLabel() + "</h3>\n                        <p>" + articlepanier.getArticle().getDescription() + "</p>\n                    </div>\n                </div>\n            </td>\n            <td>" + articlepanier.getArticle().getPrix() + "</td>\n            <td>" + articlepanier.calculerTotal() + "</td>\n            <td> <button class=\"btn btn-danger\">Supprimer</button> </td>\n        </tr>\n    ";
+}
+exports.generateHTMLArticlePanier = generateHTMLArticlePanier;
+function getBasPanier() {
+    return "\n        </tbody>\n        <tfoot>\n            <tr>\n                <td class=\"text-center\">Total $ </td>\n            </tr>\n            \n    ";
+}
+exports.getBasPanier = getBasPanier;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+//source: https://gist.github.com/Digiman/9fc2640b84bbe5162cf1
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var StorageItem = /** @class */function () {
+    function StorageItem(data) {
+        this.key = data.key;
+        this.value = data.value;
+    }
+    return StorageItem;
+}();
+exports.StorageItem = StorageItem;
+// class for working with local storage in browser (common that can use other classes for store some data)
+var LocalStorageWorker = /** @class */function () {
+    function LocalStorageWorker() {
+        this.localStorageSupported = typeof window['localStorage'] != "undefined" && window['localStorage'] != null;
+    }
+    // add value to storage
+    LocalStorageWorker.prototype.add = function (key, item) {
+        if (this.localStorageSupported) {
+            localStorage.setItem(key, item);
+        }
+    };
+    // get all values from storage (all items)
+    LocalStorageWorker.prototype.getAllItems = function () {
+        var list = new Array();
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            var value = localStorage.getItem(key);
+            list.push(new StorageItem({
+                key: key,
+                value: value
+            }));
+        }
+        return list;
+    };
+    // get only all values from localStorage
+    LocalStorageWorker.prototype.getAllValues = function () {
+        var list = new Array();
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            var value = localStorage.getItem(key);
+            list.push(value);
+        }
+        return list;
+    };
+    // get one item by key from storage
+    LocalStorageWorker.prototype.get = function (key) {
+        if (this.localStorageSupported) {
+            var item = localStorage.getItem(key);
+            return item;
+        } else {
+            return null;
+        }
+    };
+    // remove value from storage
+    LocalStorageWorker.prototype.remove = function (key) {
+        if (this.localStorageSupported) {
+            localStorage.removeItem(key);
+        }
+    };
+    // clear storage (remove all items from it)
+    LocalStorageWorker.prototype.clear = function () {
+        if (this.localStorageSupported) {
+            localStorage.clear();
+        }
+    };
+    return LocalStorageWorker;
+}();
+exports.LocalStorageWorker = LocalStorageWorker;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
-var ViewLogin_1 = __webpack_require__(12);
+var ViewLogin_1 = __webpack_require__(14);
 var ViewMenu_1 = __webpack_require__(1);
-var AdminController_1 = __webpack_require__(3);
+var AdminController_1 = __webpack_require__(4);
 var LoginController = /** @class */function () {
     function LoginController() {}
     LoginController.prototype.display = function () {
@@ -10777,7 +10901,7 @@ var LoginController = /** @class */function () {
 exports.LoginController = LoginController;
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10790,7 +10914,7 @@ function generateHTMLFormLogin() {
 exports.generateHTMLFormLogin = generateHTMLFormLogin;
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
