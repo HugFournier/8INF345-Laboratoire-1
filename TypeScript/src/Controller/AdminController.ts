@@ -13,6 +13,9 @@ export class AdminController implements IController{
         htmlAdmin += this.generateTableauArticleAdmin();
         htmlAdmin += getBasTableau();
         body.html(htmlAdmin);
+        this.chargerEventBoutonModifier();
+        this.chargerEventBoutonAjouter();
+        this.chargerEventBoutonSupprimer();
     }
 
     private generateTableauArticleAdmin(): string{
@@ -22,6 +25,24 @@ export class AdminController implements IController{
             html += generateArticleAdmin(article);
         });
         return html;
+    }
+
+    private chargerEventBoutonAjouter(){
+        let btn = $('#ajouterArticleAdmin').on('click', function(event){
+            alert("Vous avez ajouté un article.");
+        });  
+    }
+
+    private chargerEventBoutonSupprimer(){
+        let btn = $('.btnSuppr').on('click', function(event){
+            alert("Vous avez supprimé l'article.");
+        });  
+    }
+
+    private chargerEventBoutonModifier(){
+        let btn = $('.btnModif').on('click', function(event){
+            alert("Vous avez modifié l'article.");
+        });   
     }
 
 }

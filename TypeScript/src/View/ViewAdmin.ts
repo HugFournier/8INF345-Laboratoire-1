@@ -27,8 +27,8 @@ export function generateArticleAdmin(article: Article): string{
         <td><input type="text" class="form-control" value="${article.getDescription()}"></td>
         <td><input type="number" class="form-control" value="${article.getPrix()}"></td>
         <td>
-            <button class="btn btn-success">+</button>
-            <button class="btn btn-danger">-</button>
+            <button class="btn btn-success btnModif">+</button>
+            <button class="btn btn-danger btnSuppr">-</button>
         </td>
     </tr>
     `;
