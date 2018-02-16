@@ -24,16 +24,16 @@ export function generateHTMLArticlePanier(articlepanier: ArticlePanier): string{
             <td>
                 <div class="row">
                     <div class="col-sm-3">
-                        <img src="${articlepanier.getArticle().getImage()}" class="img-responsive"/>
+                        <img src="${articlepanier.getArticleParId(articlepanier.getID()).getImage()}" class="img-responsive"/>
                     </div>
                     <div class="col-sm-10">
-                        <h3>${articlepanier.getArticle().getLabel()}</h3>
-                        <p>${articlepanier.getArticle().getDescription()}</p>
+                        <h3>${articlepanier.getArticleParId(articlepanier.getID()).getLabel()}</h3>
+                        <p>${articlepanier.getArticleParId(articlepanier.getID()).getDescription()}</p>
                     </div>
                 </div>
             </td>
-            <td>${articlepanier.getArticle().getPrix()}</td>
-            <td>${articlepanier.calculerTotal()}</td>
+            <td>${articlepanier.getArticleParId(articlepanier.getID()).getPrix()}</td>
+            <td>${articlepanier.calculerTotal(articlepanier.getArticleParId(articlepanier.getID()))}</td>
             <td> <button class="btn btn-danger">Supprimer</button> </td>
         </tr>
     `;

@@ -1,13 +1,14 @@
 import { Article } from "./Article";
+import {Service} from "../Service/Service";
 
 export class ArticlePanier {
 
-    constructor(private article: Article, private quantite: number){
+    constructor(private id: number, private quantite: number){
 
     }
 
-    getArticle(): Article{
-        return this.article;
+    getID(): number{
+        return this.id;
     }
 
     getQuantite(): number{
@@ -18,9 +19,13 @@ export class ArticlePanier {
         this.quantite = value;
     }
 
+    getArticleParId(id: number){
+        return new Service().getArticleParID(id);
+    }
+
     //Méthode permettant de calculer le sous-total en fonction du nombre d'articles
-    calculerTotal(): number{
-        return this.article.getPrix() * this.quantite; 
+    calculerTotal(article: Article): number{
+        return article.getPrix() * this.quantite; 
     }
 
 }
