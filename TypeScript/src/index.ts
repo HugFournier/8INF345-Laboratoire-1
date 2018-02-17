@@ -9,6 +9,7 @@ import * as ts from "typescript";
 import { IController } from './Controller/IController';
 import { LoginController } from './Controller/LoginController';
 import { AdminController } from './Controller/AdminController';
+import { DescriptionController } from './Controller/DescriptionController';
 //#endregion
 
 $(function(){
@@ -17,15 +18,25 @@ $(function(){
 
     let controller: IController;
 
-    if (uri['view'] === "Accueil" || uri['view'] == null){
+    if (uri['view'] === "Accueil" || uri['view'] == null)
+    {
         controller = new AccueilController();
     }
-    else if(uri['view'] === "Panier") {
+    else if(uri['view'] === "Panier")
+    {
         controller = new PanierController();
-    } else if (uri['view'] === "Login"){
+    } 
+    else if (uri['view'] === "Login")
+    {
         controller = new LoginController();
-    } else if (uri['view'] === "Admin"){
+    }
+    else if (uri['view'] === "Admin")
+    {
         controller = new AdminController();
+    }
+    else if (uri['view'] === "Description")
+    {
+        controller = new DescriptionController(+uri['idArticle']);
     }
     controller.display();
 });

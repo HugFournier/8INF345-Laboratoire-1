@@ -35,20 +35,20 @@ export function generateHTMLArticlePanier(articlepanier: ArticlePanier): string{
                     </div>
                 </div>
             </td>
-            <td>${article.getPrix()}</td>
+            <td>$${article.getPrix()}</td>
             <td>${articlepanier.getQuantite()}</td>
-            <td>${articlepanier.calculerTotal()}</td>
+            <td>$${articlepanier.calculerTotal()}</td>
             <td> <button class="btn btn-danger">Supprimer</button> </td>
         </tr>
     `;
 }
 
-export function getBasPanier(panier : Panier = null): string{
+export function getBasPanier(panier : Panier): string{
     return `
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5" class="text-center">Total $ ${panier.calculerTotal()}</td>
+                <td colspan="5" class="text-center">Total $${panier.calculerTotal()}</td>
             </tr>
         </foot>
             
