@@ -2,7 +2,7 @@ export class Article{
 
     private image : URL;
 
-    public constructor(private ID : number, private label : String, private description : String, private prix : number, image : String){
+    public constructor(private ID : number, private label : string, private description : string, private prix : number, image : String){
         this.image = new URL(image as string);
     };
 
@@ -10,11 +10,11 @@ export class Article{
         return this.ID;
     }
 
-    public getLabel() : String {
+    public getLabel() : string {
         return this.label;
     }
 
-    public getDescription() : String {
+    public getDescription() : string {
         return this.description;
     }
 

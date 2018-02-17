@@ -6,10 +6,11 @@ export function getEnTeteTableau(): string{
     return `
         <div class="container">
             <h1>Panneau d'administration</h1>
-            <table class="table table-responsive">
+            <table id="tableAdmin" class="table table-responsive">
                 <thead>
                     <tr>
-                        <th style="width:25%">Nom</th>
+                        <th style="width:5%">ID</th>
+                        <th style="width:20%">Nom</th>
                         <th style="width:55%">Description</th>
                         <th style="width:10%">Prix</th>
                         <th style="width:20%">Action</th>
@@ -23,6 +24,7 @@ export function getEnTeteTableau(): string{
 export function generateArticleAdmin(article: Article): string{
     return `
     <tr>
+        <td><p>${article.getID()}</p></td>
         <td><input type="text" class="form-control" value="${article.getLabel()}"></td>
         <td><input type="text" class="form-control" value="${article.getDescription()}"></td>
         <td><input type="number" class="form-control" value="${article.getPrix()}"></td>
@@ -37,16 +39,17 @@ export function generateArticleAdmin(article: Article): string{
 //Génère l'HTML pour les dernières lignes du tableau du panneau d'administration
 export function getBasTableau(): string{
     return `
-        <tr>
-            <td><input type="text" class="form-control" placeholder="Nom de l'article"></td>
-            <td><input type="text" class="form-control" placeholder="Description"></td>
-            <td><input type="number" class="form-control" placeholder="Prix"></td>
-            <td>
-                <button id="ajouterArticleAdmin" class="btn btn-success">Ajouter</button>
-            </td>
-        </tr>
         </tbody>
         <tfoot>
+            <tr>
+                <td><input id="newID" type="number" class="form-control" placeholder="ID" required></td>
+                <td><input id="newNom" type="text" class="form-control" placeholder="Nom de l'article" required></td>
+                <td><input id="newDescription" type="text" class="form-control" placeholder="Description" required></td>
+                <td><input id="newPrix" type="number" class="form-control" placeholder="Prix" required></td>
+                <td>
+                    <button id="ajouterArticleAdmin" class="btn btn-success">Ajouter</button>
+                </td>
+            </tr>
             <tr>
                 <td><a href="?" class="btn btn-warning">Retour</a></td>
             </tr>

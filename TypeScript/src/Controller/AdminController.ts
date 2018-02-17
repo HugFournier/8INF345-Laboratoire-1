@@ -3,6 +3,7 @@ import { IController } from "./IController";
 import {Service} from '../Service/Service';
 import {getNav} from '../View/ViewMenu';
 import { getEnTeteTableau, getBasTableau, generateArticleAdmin } from "../View/ViewAdmin";
+import { Article } from '../Model/Article';
 
 export class AdminController implements IController{
 
@@ -28,9 +29,12 @@ export class AdminController implements IController{
     }
 
     private chargerEventBoutonAjouter(){
-        let btn = $('#ajouterArticleAdmin').on('click', function(event){
-            alert("Vous avez ajouté un article.");
-        });  
+        let btn = $('#ajouterArticleAdmin').on('click', this.addArticle);
+    }
+
+    private addArticle() {
+        let newArticle: Article = new Article(parseInt($('#newID').val().toString()), $('#newNom').val().toString(), $('#newDescription').val().toString(), parseInt($('#newPrix').val().toString()), "http://lorempixel.com/200/200/");
+        $('#tableAdmin').find('tbody').append(generateArticleAdmin(newArticle));
     }
 
     private chargerEventBoutonSupprimer(){
