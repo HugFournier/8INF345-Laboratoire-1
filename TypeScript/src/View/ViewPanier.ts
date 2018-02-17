@@ -2,6 +2,7 @@ import * as $ from 'jquery';
 import { ArticlePanier } from "../Model/ArticlePanier";
 import { Article } from '../Model/Article';
 import { Panier } from '../Model/Panier';
+import { PanierController } from '../Controller/PanierController';
 
 export function getEntetePanier(): string{
     return `
@@ -38,19 +39,30 @@ export function generateHTMLArticlePanier(articlepanier: ArticlePanier): string{
             <td>$${article.getPrix()}</td>
             <td>${articlepanier.getQuantite()}</td>
             <td>$${articlepanier.calculerTotal()}</td>
-            <td> <button class="btn btn-danger">Supprimer</button> </td>
+            <td> ${getCodeBoutonSupprimer(article.getID())} </td>
         </tr>
     `;
 }
 
 export function getBasPanier(panier : Panier): string{
+    let total : number = panier.calculerTotal();
     return `
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5" class="text-center">Total $${panier.calculerTotal()}</td>
+                <td colspan="5" class="text-center">Total $${total}<br>${!panier.estVide() ? getCodeBoutonPasserCommande() : ""}</td>
             </tr>
         </foot>
             
     `;
+}
+
+function getCodeBoutonPasserCommande() : string
+{
+    return '<button class="btn btn-success passerCommande">Tout acheter</button>'
+}
+
+function getCodeBoutonSupprimer(id :number) : string
+{
+    return '<button idArticle='+ id.toString() +' class="btn btn-danger supprimerArticlePanier">Supprimer</button>'
 }
