@@ -19,13 +19,13 @@ export class ArticlePanier {
         this.quantite = value;
     }
 
-    getArticleParId(id: number) : Article{
-        return new Service().getArticleParID(id);
+    getArticle() : Article{
+        return new Service().getArticleParID(this.id);
     }
 
     //Méthode permettant de calculer le sous-total en fonction du nombre d'articles
-    calculerTotal(article: Article): number{
-        return article.getPrix() * this.quantite; 
+    calculerTotal(): number{
+        return this.getArticle().getPrix() * this.quantite; 
     }
 
 }

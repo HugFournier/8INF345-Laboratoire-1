@@ -22,4 +22,12 @@ export class Panier{
     public getArticlesPanier() : ArticlePanier[]{
         return this.items;
     }
+
+    public calculerTotal():number{
+        let total : number = 0;
+        this.items.forEach(element => {
+            total += element.calculerTotal();
+        });
+        return total;
+    }
 }
