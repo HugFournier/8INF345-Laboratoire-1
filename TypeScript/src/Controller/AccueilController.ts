@@ -28,12 +28,20 @@ export class AccueilController implements IController{
         htmlAcc += this.generateTableauHTMLArticles();
         body.html(htmlAcc);
         this.chargerEventBouton();
+        this.chargerEventLigne();
     }
 
     private chargerEventBouton(){
         let btn = $('.addPanier').on('click', function(event){
             let id:number = +event.currentTarget.getAttribute("idArticle");
             new PanierController().addArticleParID(id);
+        });
+    }
+
+    private chargerEventLigne(){
+        let btn = $('.detail').on('click', function(event){
+            let id:number = +event.currentTarget.getAttribute("idArticle");
+            window.open("?view=Description&idArticle=" + id.toString(),"_self");
         });
     }
 }
