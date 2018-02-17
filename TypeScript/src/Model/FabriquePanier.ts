@@ -7,9 +7,13 @@ export class FabriquePanier{
 
     }
 
-    factoryArticlePanier(JSONString: string): Panier {
-        console.log(JSONString);
-        return new Panier();
+    factoryArticlePanierFromJSON(JSONString: string): Panier {
+        let panier : Panier = new Panier();
+        JSONString = JSON.parse(JSONString);
+        JSONString["items"].forEach(articlePanierJSON => {
+            panier.addItem(articlePanierJSON["id"],articlePanierJSON["quantite"]);
+        });
+        return panier;
     }
 
 }

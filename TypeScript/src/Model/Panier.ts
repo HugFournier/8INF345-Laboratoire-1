@@ -10,25 +10,16 @@ export class Panier{
         this.items = new Array();
     }
 
-    public addItem(id: number){
-        /*let article : Article = new Service().getArticleParID(id);
-        let articlePanier: ArticlePanier = this.items.find(articlePanier => articlePanier.getArticle() === article);
+    public addItem(id: number, quantite : number = 1){
+        let articlePanier: ArticlePanier = this.items.find(articlePanier => articlePanier.getID() === id);
         if(articlePanier == undefined){
-            this.items.push(new ArticlePanier(article, 1));
-            console.log("item"+this.items);
+            this.items.push(new ArticlePanier(id, quantite));
         } else {
-            articlePanier.setQuantite(articlePanier.getQuantite() + 1);
-        }*/
-        let articlePanier: ArticlePanier = this.items.find(articlePanier => articlePanier.getID() == id);
-        if(articlePanier == undefined){
-            this.items.push(new ArticlePanier(id, 1));
-        } else {
-            articlePanier.setQuantite(articlePanier.getQuantite() + 1);
+            articlePanier.setQuantite(articlePanier.getQuantite() + quantite);
         }
     }
 
     public getArticlesPanier() : ArticlePanier[]{
         return this.items;
     }
-
 }

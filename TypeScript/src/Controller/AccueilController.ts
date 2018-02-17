@@ -33,8 +33,7 @@ export class AccueilController implements IController{
     private chargerEventBouton(){
         let btn = $('.addPanier').on('click', function(event){
             let id:number = +event.currentTarget.getAttribute("idArticle");
-            let CPanier:PanierController = new PanierController();
-            CPanier.addArticleParID(id);
+            new PanierController().addArticleParID(id);
         });
     }
 }

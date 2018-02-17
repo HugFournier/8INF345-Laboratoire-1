@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10455,7 +10455,7 @@ exports.getNav = getNav;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Article_1 = __webpack_require__(7);
+var Article_1 = __webpack_require__(8);
 var Service = /** @class */function () {
     function Service() {}
     Service.prototype.returnArticlesStub = function () {
@@ -10481,9 +10481,10 @@ exports.Service = Service;
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
 var ViewMenu_1 = __webpack_require__(1);
-var Panier_1 = __webpack_require__(9);
+var Panier_1 = __webpack_require__(4);
 var ViewPanier_1 = __webpack_require__(11);
 var StorageHelper_1 = __webpack_require__(12);
+var FabriquePanier_1 = __webpack_require__(13);
 var PanierController = /** @class */function () {
     function PanierController() {}
     PanierController.prototype.display = function () {
@@ -10499,7 +10500,7 @@ var PanierController = /** @class */function () {
     };
     PanierController.prototype.addArticleParID = function (id) {
         var stockage = new StorageHelper_1.LocalStorageWorker();
-        var panier = JSON.parse(stockage.get("panier"));
+        var panier = new FabriquePanier_1.FabriquePanier().factoryArticlePanierFromJSON(JSON.parse(stockage.get("panier")));
         if (panier == null) {
             panier = new Panier_1.Panier();
         } else {
@@ -10511,7 +10512,7 @@ var PanierController = /** @class */function () {
     PanierController.prototype.getPanier = function () {
         var stockage = new StorageHelper_1.LocalStorageWorker();
         console.log(stockage.get('panier'));
-        var panier = JSON.parse(stockage.get('panier'));
+        var panier = new FabriquePanier_1.FabriquePanier().factoryArticlePanierFromJSON(JSON.parse(stockage.get("panier")));
         if (panier == null) {
             panier = new Panier_1.Panier();
             stockage.add("panier", JSON.stringify(panier));
@@ -10531,31 +10532,27 @@ exports.PanierController = PanierController;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(0);
-var Service_1 = __webpack_require__(2);
-var ViewMenu_1 = __webpack_require__(1);
-var ViewAdmin_1 = __webpack_require__(15);
-var AdminController = /** @class */function () {
-    function AdminController() {}
-    AdminController.prototype.display = function () {
-        var body = $('body');
-        var htmlAdmin = ViewMenu_1.getNav();
-        htmlAdmin += ViewAdmin_1.getEnTeteTableau();
-        htmlAdmin += this.generateTableauArticleAdmin();
-        htmlAdmin += ViewAdmin_1.getBasTableau();
-        body.html(htmlAdmin);
-    };
-    AdminController.prototype.generateTableauArticleAdmin = function () {
-        var html;
-        var liArticles = new Service_1.Service().returnArticlesStub();
-        liArticles.forEach(function (article) {
-            html += ViewAdmin_1.generateArticleAdmin(article);
+var ArticlePanier_1 = __webpack_require__(10);
+var Panier = /** @class */function () {
+    function Panier() {
+        this.items = new Array();
+    }
+    Panier.prototype.addItem = function (id) {
+        var articlePanier = this.items.find(function (articlePanier) {
+            return articlePanier.getID() === id;
         });
-        return html;
+        if (articlePanier == undefined) {
+            this.items.push(new ArticlePanier_1.ArticlePanier(id, 1));
+        } else {
+            articlePanier.setQuantite(articlePanier.getQuantite() + 1);
+        }
     };
-    return AdminController;
+    Panier.prototype.getArticlesPanier = function () {
+        return this.items;
+    };
+    return Panier;
 }();
-exports.AdminController = AdminController;
+exports.Panier = Panier;
 
 /***/ }),
 /* 5 */
@@ -10565,12 +10562,64 @@ exports.AdminController = AdminController;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
+var Service_1 = __webpack_require__(2);
+var ViewMenu_1 = __webpack_require__(1);
+var ViewAdmin_1 = __webpack_require__(16);
+var AdminController = /** @class */function () {
+    function AdminController() {}
+    AdminController.prototype.display = function () {
+        var body = $('body');
+        var htmlAdmin = ViewMenu_1.getNav();
+        htmlAdmin += ViewAdmin_1.getEnTeteTableau();
+        htmlAdmin += this.generateTableauArticleAdmin();
+        htmlAdmin += ViewAdmin_1.getBasTableau();
+        body.html(htmlAdmin);
+        this.chargerEventBoutonModifier();
+        this.chargerEventBoutonAjouter();
+        this.chargerEventBoutonSupprimer();
+    };
+    AdminController.prototype.generateTableauArticleAdmin = function () {
+        var html;
+        var liArticles = new Service_1.Service().returnArticlesStub();
+        liArticles.forEach(function (article) {
+            html += ViewAdmin_1.generateArticleAdmin(article);
+        });
+        return html;
+    };
+    AdminController.prototype.chargerEventBoutonAjouter = function () {
+        var btn = $('#ajouterArticleAdmin').on('click', function (event) {
+            alert("Vous avez ajouté un article.");
+        });
+    };
+    AdminController.prototype.chargerEventBoutonSupprimer = function () {
+        var btn = $('.btnSuppr').on('click', function (event) {
+            alert("Vous avez supprimé l'article.");
+        });
+    };
+    AdminController.prototype.chargerEventBoutonModifier = function () {
+        var btn = $('.btnModif').on('click', function (event) {
+            alert("Vous avez modifié l'article.");
+        });
+    };
+    return AdminController;
+}();
+exports.AdminController = AdminController;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
 //#region import
 var $ = __webpack_require__(0);
-var AccueilController_1 = __webpack_require__(6);
+var AccueilController_1 = __webpack_require__(7);
 var PanierController_1 = __webpack_require__(3);
-var LoginController_1 = __webpack_require__(13);
-var AdminController_1 = __webpack_require__(4);
+var LoginController_1 = __webpack_require__(14);
+var AdminController_1 = __webpack_require__(5);
 //#endregion
 $(function () {
     //Récupération des paramètres URL
@@ -10607,7 +10656,7 @@ function parseQueryString(queryString) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10617,7 +10666,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
 var Service_1 = __webpack_require__(2);
 var ViewMenu_1 = __webpack_require__(1);
-var ViewArticle_1 = __webpack_require__(8);
+var ViewArticle_1 = __webpack_require__(9);
 var PanierController_1 = __webpack_require__(3);
 var AccueilController = /** @class */function () {
     function AccueilController() {}
@@ -10640,8 +10689,7 @@ var AccueilController = /** @class */function () {
     AccueilController.prototype.chargerEventBouton = function () {
         var btn = $('.addPanier').on('click', function (event) {
             var id = +event.currentTarget.getAttribute("idArticle");
-            var CPanier = new PanierController_1.PanierController();
-            CPanier.addArticleParID(id);
+            new PanierController_1.PanierController().addArticleParID(id);
         });
     };
     return AccueilController;
@@ -10649,7 +10697,7 @@ var AccueilController = /** @class */function () {
 exports.AccueilController = AccueilController;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10688,7 +10736,7 @@ var Article = /** @class */function () {
 exports.Article = Article;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10708,39 +10756,6 @@ function getBoutonAjouterPanier(id) {
 }
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ArticlePanier_1 = __webpack_require__(10);
-var Service_1 = __webpack_require__(2);
-var Panier = /** @class */function () {
-    function Panier() {
-        this.items = new Array();
-    }
-    Panier.prototype.addItem = function (id) {
-        var article = new Service_1.Service().getArticleParID(id);
-        var articlePanier = this.items.find(function (articlePanier) {
-            return articlePanier.getArticle() === article;
-        });
-        if (articlePanier == undefined) {
-            this.items.push(new ArticlePanier_1.ArticlePanier(article, 1));
-            console.log("item" + this.items);
-        } else {
-            articlePanier.setQuantite(articlePanier.getQuantite() + 1);
-        }
-    };
-    Panier.prototype.getArticlesPanier = function () {
-        return this.items;
-    };
-    return Panier;
-}();
-exports.Panier = Panier;
-
-/***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10748,13 +10763,14 @@ exports.Panier = Panier;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var Service_1 = __webpack_require__(2);
 var ArticlePanier = /** @class */function () {
-    function ArticlePanier(article, quantite) {
-        this.article = article;
+    function ArticlePanier(id, quantite) {
+        this.id = id;
         this.quantite = quantite;
     }
-    ArticlePanier.prototype.getArticle = function () {
-        return this.article;
+    ArticlePanier.prototype.getID = function () {
+        return this.id;
     };
     ArticlePanier.prototype.getQuantite = function () {
         return this.quantite;
@@ -10762,9 +10778,12 @@ var ArticlePanier = /** @class */function () {
     ArticlePanier.prototype.setQuantite = function (value) {
         this.quantite = value;
     };
+    ArticlePanier.prototype.getArticleParId = function (id) {
+        return new Service_1.Service().getArticleParID(id);
+    };
     //Méthode permettant de calculer le sous-total en fonction du nombre d'articles
-    ArticlePanier.prototype.calculerTotal = function () {
-        return this.article.getPrix() * this.quantite;
+    ArticlePanier.prototype.calculerTotal = function (article) {
+        return article.getPrix() * this.quantite;
     };
     return ArticlePanier;
 }();
@@ -10783,7 +10802,7 @@ function getEntetePanier() {
 }
 exports.getEntetePanier = getEntetePanier;
 function generateHTMLArticlePanier(articlepanier) {
-    return "\n        <tr>\n            <td>\n                <div class=\"row\">\n                    <div class=\"col-sm-3\">\n                        <img src=\"" + articlepanier.getArticle().getImage() + "\" class=\"img-responsive\"/>\n                    </div>\n                    <div class=\"col-sm-10\">\n                        <h3>" + articlepanier.getArticle().getLabel() + "</h3>\n                        <p>" + articlepanier.getArticle().getDescription() + "</p>\n                    </div>\n                </div>\n            </td>\n            <td>" + articlepanier.getArticle().getPrix() + "</td>\n            <td>" + articlepanier.calculerTotal() + "</td>\n            <td> <button class=\"btn btn-danger\">Supprimer</button> </td>\n        </tr>\n    ";
+    return "\n        <tr>\n            <td>\n                <div class=\"row\">\n                    <div class=\"col-sm-3\">\n                        <img src=\"" + articlepanier.getArticleParId(articlepanier.getID()).getImage() + "\" class=\"img-responsive\"/>\n                    </div>\n                    <div class=\"col-sm-10\">\n                        <h3>" + articlepanier.getArticleParId(articlepanier.getID()).getLabel() + "</h3>\n                        <p>" + articlepanier.getArticleParId(articlepanier.getID()).getDescription() + "</p>\n                    </div>\n                </div>\n            </td>\n            <td>" + articlepanier.getArticleParId(articlepanier.getID()).getPrix() + "</td>\n            <td>" + articlepanier.calculerTotal(articlepanier.getArticleParId(articlepanier.getID())) + "</td>\n            <td> <button class=\"btn btn-danger\">Supprimer</button> </td>\n        </tr>\n    ";
 }
 exports.generateHTMLArticlePanier = generateHTMLArticlePanier;
 function getBasPanier() {
@@ -10875,10 +10894,29 @@ exports.LocalStorageWorker = LocalStorageWorker;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var Panier_1 = __webpack_require__(4);
+var FabriquePanier = /** @class */function () {
+    function FabriquePanier() {}
+    FabriquePanier.prototype.factoryArticlePanierFromJSON = function (JSONString) {
+        console.log(JSONString[0]);
+        return new Panier_1.Panier();
+    };
+    return FabriquePanier;
+}();
+exports.FabriquePanier = FabriquePanier;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
-var ViewLogin_1 = __webpack_require__(14);
+var ViewLogin_1 = __webpack_require__(15);
 var ViewMenu_1 = __webpack_require__(1);
-var AdminController_1 = __webpack_require__(4);
+var AdminController_1 = __webpack_require__(5);
 var LoginController = /** @class */function () {
     function LoginController() {}
     LoginController.prototype.display = function () {
@@ -10901,7 +10939,7 @@ var LoginController = /** @class */function () {
 exports.LoginController = LoginController;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10914,7 +10952,7 @@ function generateHTMLFormLogin() {
 exports.generateHTMLFormLogin = generateHTMLFormLogin;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10928,7 +10966,7 @@ function getEnTeteTableau() {
 exports.getEnTeteTableau = getEnTeteTableau;
 //Génère l'HTML pour un article passé en paramètre
 function generateArticleAdmin(article) {
-    return "\n    <tr>\n        <td><input type=\"text\" class=\"form-control\" value=\"" + article.getLabel() + "\"></td>\n        <td><input type=\"text\" class=\"form-control\" value=\"" + article.getDescription() + "\"></td>\n        <td><input type=\"number\" class=\"form-control\" value=\"" + article.getPrix() + "\"></td>\n        <td>\n            <button class=\"btn btn-success\">+</button>\n            <button class=\"btn btn-danger\">-</button>\n        </td>\n    </tr>\n    ";
+    return "\n    <tr>\n        <td><input type=\"text\" class=\"form-control\" value=\"" + article.getLabel() + "\"></td>\n        <td><input type=\"text\" class=\"form-control\" value=\"" + article.getDescription() + "\"></td>\n        <td><input type=\"number\" class=\"form-control\" value=\"" + article.getPrix() + "\"></td>\n        <td>\n            <button class=\"btn btn-success btnModif\">+</button>\n            <button class=\"btn btn-danger btnSuppr\">-</button>\n        </td>\n    </tr>\n    ";
 }
 exports.generateArticleAdmin = generateArticleAdmin;
 //Génère l'HTML pour les dernières lignes du tableau du panneau d'administration

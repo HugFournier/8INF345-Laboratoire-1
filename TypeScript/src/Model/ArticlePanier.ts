@@ -19,7 +19,7 @@ export class ArticlePanier {
         this.quantite = value;
     }
 
-    getArticleParId(id: number){
+    getArticleParId(id: number) : Article{
         return new Service().getArticleParID(id);
     }
 
