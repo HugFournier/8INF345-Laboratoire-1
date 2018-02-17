@@ -13,10 +13,19 @@ export class Panier{
     public addItem(id: number, quantite : number = 1){
         let articlePanier: ArticlePanier = this.items.find(articlePanier => articlePanier.getID() === id);
         if(articlePanier == undefined){
-            this.items.push(new ArticlePanier(id, quantite));
+            this.items.push(new ArticlePanier(id, quantite>0?quantite:1));
         } else {
-            articlePanier.setQuantite(articlePanier.getQuantite() + quantite);
+            if(articlePanier.getQuantite() + quantite>0){
+                articlePanier.setQuantite(articlePanier.getQuantite() + quantite);
+            }
         }
+    }
+
+    public removeItem(id: number){
+        let articlePanier: ArticlePanier = this.items.find(articlePanier => articlePanier.getID() === id);
+        let index : number = this.items.indexOf(articlePanier);
+        if(index > -1)
+            this.items.splice(index,1);
     }
 
     public getArticlesPanier() : ArticlePanier[]{
@@ -29,5 +38,9 @@ export class Panier{
             total += element.calculerTotal();
         });
         return total;
+    }
+
+    public estVide():boolean{
+        return this.items.length == 0;
     }
 }

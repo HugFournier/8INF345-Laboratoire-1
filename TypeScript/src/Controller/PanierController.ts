@@ -16,15 +16,47 @@ export class PanierController implements IController{
 		panier.getArticlesPanier().forEach(e => htmlPanier += generateHTMLArticlePanier(e));
 		htmlPanier += getBasPanier(panier);
 		body.html(htmlPanier);
-	}
+        this.chargerEventBoutonSuppression();
+        this.chargerEventBoutonPasserCommande();
+    }
+
+    private chargerEventBoutonSuppression(){
+        let btn = $('.supprimerArticlePanier').on('click', function(event){
+            let id:number = +event.currentTarget.getAttribute("idArticle");
+			let CPanier : PanierController = new PanierController();
+			CPanier.removeArticleParID(id);
+			CPanier.display();
+        });
+    }
+
+    private chargerEventBoutonPasserCommande(){
+        let btn = $('.passerCommande').on('click', function(event){
+			let CPanier : PanierController = new PanierController();
+			CPanier.viderPanier();
+			CPanier.display();
+			alert("Commande réalisée avec succés ! Vous pouvez maitenant retourner à l'accueil");
+        });
+    }
 
 	public addArticleParID(id:number){
 		let stockage : LocalStorageWorker = new LocalStorageWorker();
-		
 		let panier:Panier = this.getPanier();
 		stockage.remove("panier");
 		panier.addItem(id);
 		stockage.add('panier', JSON.stringify(panier));
+	}
+
+	public removeArticleParID(id:number){
+		let stockage : LocalStorageWorker = new LocalStorageWorker();
+		let panier:Panier = this.getPanier();
+		stockage.remove("panier");
+		panier.removeItem(id);
+		stockage.add('panier', JSON.stringify(panier));
+	}
+
+	public viderPanier(){
+		let stockage : LocalStorageWorker = new LocalStorageWorker();
+		stockage.remove("panier");
 	}
 
 	public getPanier(): Panier{
