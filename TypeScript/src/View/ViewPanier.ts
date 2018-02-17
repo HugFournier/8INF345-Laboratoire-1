@@ -1,5 +1,7 @@
 import * as $ from 'jquery';
 import { ArticlePanier } from "../Model/ArticlePanier";
+import { Article } from '../Model/Article';
+import { Panier } from '../Model/Panier';
 
 export function getEntetePanier(): string{
     return `
@@ -19,33 +21,36 @@ export function getEntetePanier(): string{
 }
 
 export function generateHTMLArticlePanier(articlepanier: ArticlePanier): string{
+    let article : Article = articlepanier.getArticle();
     return `
         <tr>
             <td>
                 <div class="row">
                     <div class="col-sm-3">
-                        <img src="${articlepanier.getArticleParId(articlepanier.getID()).getImage()}" class="img-responsive"/>
+                        <img src="${article.getImage()}" class="img-responsive"/>
                     </div>
                     <div class="col-sm-10">
-                        <h3>${articlepanier.getArticleParId(articlepanier.getID()).getLabel()}</h3>
-                        <p>${articlepanier.getArticleParId(articlepanier.getID()).getDescription()}</p>
+                        <h3>${article.getLabel()}</h3>
+                        <p>${article.getDescription()}</p>
                     </div>
                 </div>
             </td>
-            <td>${articlepanier.getArticleParId(articlepanier.getID()).getPrix()}</td>
-            <td>${articlepanier.calculerTotal(articlepanier.getArticleParId(articlepanier.getID()))}</td>
+            <td>${article.getPrix()}</td>
+            <td>${articlepanier.getQuantite()}</td>
+            <td>${articlepanier.calculerTotal()}</td>
             <td> <button class="btn btn-danger">Supprimer</button> </td>
         </tr>
     `;
 }
 
-export function getBasPanier(): string{
+export function getBasPanier(panier : Panier = null): string{
     return `
         </tbody>
         <tfoot>
             <tr>
-                <td class="text-center">Total $ </td>
+                <td colspan="5" class="text-center">Total $ ${panier.calculerTotal()}</td>
             </tr>
+        </foot>
             
     `;
 }

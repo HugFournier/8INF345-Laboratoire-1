@@ -14,7 +14,7 @@ export class PanierController implements IController{
 		let panier : Panier = this.getPanier();
 		htmlPanier += getEntetePanier();
 		panier.getArticlesPanier().forEach(e => htmlPanier += generateHTMLArticlePanier(e));
-		htmlPanier += getBasPanier();
+		htmlPanier += getBasPanier(panier);
 		body.html(htmlPanier);
 	}
 
