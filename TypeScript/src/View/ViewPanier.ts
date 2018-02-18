@@ -11,11 +11,11 @@ export function getEntetePanier(): string{
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th style="width:50%">Article</th>
+                    <th style="width:55%">Article</th>
                     <th style="width:10%">Prix</th>
                     <th style="width:10%">Quantitée</th>
-                    <th style="width:25%">Sous-Total</th>
-                    <th style="width:10%"><th>
+                    <th style="width:20%">Sous-Total</th>
+                    <th style="width:5%"><th>
                 </tr>
             </thead>
             <tbody>
