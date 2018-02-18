@@ -14,8 +14,8 @@ export class AdminController implements IController{
         htmlAdmin += this.generateTableauArticleAdmin();
         htmlAdmin += getBasTableau();
         body.html(htmlAdmin);
-        this.chargerEventBoutonModifier();
         let btn = $('#ajouterArticleAdmin').on('click', this.addArticle); //Charge l'evenement du bouton pour ajouter un article
+        this.chargerEventBoutonModifier();
         this.chargerEventBoutonSupprimer();
     }
 
@@ -29,10 +29,12 @@ export class AdminController implements IController{
     }
 
     private addArticle() {
-        if($('#newID').val() != '' && $('#newNom').val() != '' && $('#newDescription').val() != '' && $('#newPrix').val() != ''){
+        if(!(/^\s*$/.test(<string>$('#newID').val()) || /^\s*$/.test(<string>$('#newNom').val()) || /^\s*$/.test(<string>$('#newDescription').val()) || /^\s*$/.test(<string>$('#newPrix').val()))){
             let newArticle: Article = new Article(parseInt($('#newID').val().toString()), $('#newNom').val().toString(), $('#newDescription').val().toString(), parseInt($('#newPrix').val().toString()), "http://lorempixel.com/200/200/");
             $('#tableAdmin').find('tbody').append(generateArticleAdmin(newArticle));
             clearInputsAdmin();
+        }else{
+            alert("Veuillez renseigner tous les champs");
         }
     }
 
@@ -46,9 +48,12 @@ export class AdminController implements IController{
     }
 
     private chargerEventBoutonModifier(){
-        let btn = $('.btnModif').on('click', function(event){
+        let btn = $('#tableAdmin').on('click', '.btnModif', function(){
+            //if(/^\s*$/.test(<string> ($(this).closest('.modifLabel').val())))
+            //if(<string>$(this).closest('.modifLabel').val() != '')
+            console.log($(this).closest('tr') );
             alert("Vous avez modifié l'article.");
-        });   
+        });
     }
 
 }
