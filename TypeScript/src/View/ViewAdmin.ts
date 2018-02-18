@@ -47,7 +47,7 @@ export function getBasTableau(): string{
                 <td><input id="newDescription" type="text" class="form-control" placeholder="Description" required></td>
                 <td><input id="newPrix" type="number" class="form-control" placeholder="Prix" required></td>
                 <td>
-                    <button id="ajouterArticleAdmin" class="btn btn-success">Ajouter</button>
+                    <button type="submit" id="ajouterArticleAdmin" class="btn btn-success">Ajouter</button>
                 </td>
             </tr>
             <tr>
@@ -57,4 +57,11 @@ export function getBasTableau(): string{
         </table>
         </div>
     `;
+}
+
+export function clearInputsAdmin(){
+    $('#newID').val('');
+    $('#newNom').val('');
+    $('#newDescription').val('');
+    $('#newPrix').val('');
 }

@@ -2,7 +2,7 @@ import * as $ from 'jquery';
 import { IController } from "./IController";
 import {Service} from '../Service/Service';
 import {getNav} from '../View/ViewMenu';
-import { getEnTeteTableau, getBasTableau, generateArticleAdmin } from "../View/ViewAdmin";
+import { getEnTeteTableau, getBasTableau, generateArticleAdmin, clearInputsAdmin } from "../View/ViewAdmin";
 import { Article } from '../Model/Article';
 
 export class AdminController implements IController{
@@ -15,7 +15,7 @@ export class AdminController implements IController{
         htmlAdmin += getBasTableau();
         body.html(htmlAdmin);
         this.chargerEventBoutonModifier();
-        this.chargerEventBoutonAjouter();
+        let btn = $('#ajouterArticleAdmin').on('click', this.addArticle); //Charge l'evenement du bouton pour ajouter un article
         this.chargerEventBoutonSupprimer();
     }
 
@@ -28,19 +28,21 @@ export class AdminController implements IController{
         return html;
     }
 
-    private chargerEventBoutonAjouter(){
-        let btn = $('#ajouterArticleAdmin').on('click', this.addArticle);
-    }
-
     private addArticle() {
-        let newArticle: Article = new Article(parseInt($('#newID').val().toString()), $('#newNom').val().toString(), $('#newDescription').val().toString(), parseInt($('#newPrix').val().toString()), "http://lorempixel.com/200/200/");
-        $('#tableAdmin').find('tbody').append(generateArticleAdmin(newArticle));
+        if($('#newID').val() != '' && $('#newNom').val() != '' && $('#newDescription').val() != '' && $('#newPrix').val() != ''){
+            let newArticle: Article = new Article(parseInt($('#newID').val().toString()), $('#newNom').val().toString(), $('#newDescription').val().toString(), parseInt($('#newPrix').val().toString()), "http://lorempixel.com/200/200/");
+            $('#tableAdmin').find('tbody').append(generateArticleAdmin(newArticle));
+            clearInputsAdmin();
+        }
     }
 
     private chargerEventBoutonSupprimer(){
-        let btn = $('.btnSuppr').on('click', function(event){
-            alert("Vous avez supprimé l'article.");
-        });  
+       
+            $('#tableAdmin').on('click', '.btnSuppr', function(){
+                if(confirm("Êtes-vous sûr de vouloir supprimer cette article ?") == true){
+                    $(this).closest('tr').remove();
+                }
+            });
     }
 
     private chargerEventBoutonModifier(){
