@@ -32,7 +32,7 @@ export class Service {
         return Service.listeArticlesStub;
     }
 
-    public returnPageArticleStub(page : number = 0, nbArticle : number = 10){
+    public returnPageArticleStub(page : number = 0, nbArticle : number = 10): Array<Article>{
         return Service.listeArticlesStub.slice(page*nbArticle,(page+1)*nbArticle);
     }
 
