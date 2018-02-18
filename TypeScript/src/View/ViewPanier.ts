@@ -6,8 +6,9 @@ import { PanierController } from '../Controller/PanierController';
 
 export function getEntetePanier(): string{
     return `
+    <br/>
     <div class="container table-responsive">
-        <table class="table">
+        <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
                     <th style="width:50%">Article</th>

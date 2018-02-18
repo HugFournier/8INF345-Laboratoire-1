@@ -18,9 +18,11 @@ export function generateHTMLArticle(element: Article, isDetailed: boolean = fals
 
 export function getEnteteAccueil(nbPage : number) : string {
     return `
-        <div class='container table-responsive'>
+        <br/>
+        <div class="container table-responsive text-center">
             ${getLienPagination(nbPage)}
-            <table class='table table-hover'>
+            <br/><br/>
+            <table class="table table-hover">
     `;
 }
 
@@ -28,6 +30,7 @@ export function getBasAccueil(nbPage : number) : string {
     return `
             </table>
             ${getLienPagination(nbPage)}
+            <br/><br/>
         </div>
     `;
 }
