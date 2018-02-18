@@ -49,10 +49,15 @@ export class AdminController implements IController{
 
     private chargerEventBoutonModifier(){
         let btn = $('#tableAdmin').on('click', '.btnModif', function(){
-            //if(/^\s*$/.test(<string> ($(this).closest('.modifLabel').val())))
-            //if(<string>$(this).closest('.modifLabel').val() != '')
-            console.log($(this).closest('tr') );
-            alert("Vous avez modifié l'article.");
+            let ligneModif : JQuery<HTMLElement> = $(this).closest('tr');
+            let newLabel : string = <string> ligneModif.find('.modifLabel').val();
+            let newDescription : string = <string> ligneModif.find('.modifDescription').val();
+            let newPrix : string = <string> ligneModif.find('.modifPrix').val();
+            if(/^\s*$/.test(newLabel) || /^\s*$/.test(newDescription) || /^\s*$/.test(newPrix)){
+                alert("Veuillez ne pas laisser de champs vides");
+            }else{
+                alert("Vous avez modifié l'article");
+            }
         });
     }
 
