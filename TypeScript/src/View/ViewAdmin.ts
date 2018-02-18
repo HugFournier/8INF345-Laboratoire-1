@@ -4,6 +4,7 @@ import { Article } from "../Model/Article";
 //Génère l'HTML pour l'entête du tableau du panneau d'administration
 export function getEnTeteTableau(): string{
     return `
+        <br/><br/>
         <div class="container table-responsive">
             <h1>Panneau d'administration</h1>
             <table id="tableAdmin" class="table">

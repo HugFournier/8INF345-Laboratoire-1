@@ -34,9 +34,18 @@ export class PanierController implements IController{
 			let CPanier : PanierController = new PanierController();
 			CPanier.viderPanier();
 			CPanier.display();
-			alert("Commande réalisée avec succés ! Vous pouvez maitenant retourner à l'accueil");
+			alert("Commande réalisée avec succès, votre numéro de commande est le " + CPanier.randomisation() + ". Vous pouvez maitenant retourner à l'accueil");
         });
     }
+
+	private randomisation(): string{
+		let randomNumbers = "", randomLetters = "", possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		for(let i = 0; i < 10; i++)
+			randomNumbers += (Math.floor(Math.random() * 9) + 1).toString();
+		for (var i = 0; i < 5; i++)
+			randomLetters += possible.charAt(Math.floor(Math.random() * possible.length));
+		return "#" + randomLetters + ":" + randomNumbers;
+	}
 
 	public addArticleParID(id:number){
 		let stockage : LocalStorageWorker = new LocalStorageWorker();
