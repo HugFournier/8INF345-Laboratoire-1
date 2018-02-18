@@ -20,7 +20,7 @@ $(function(){
 
     if (uri['view'] === "Accueil" || uri['view'] == null)
     {
-        controller = new AccueilController();
+        controller = new AccueilController(uri['page'] == undefined ? 0 : +uri['page']);
     }
     else if(uri['view'] === "Panier")
     {
