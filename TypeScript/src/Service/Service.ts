@@ -1,6 +1,8 @@
 import {Article} from '../Model/Article';
 
 export class Service {
+    private static TAILLE_PAGE : number = 10;
+
     private static listeArticlesStub : Article[] = [
         new Article(0, "Pneu neige gauche", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 530, "http://lorempixel.com/200/200/"),
         new Article(1, "Pneu neige droit","Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 500, "http://lorempixel.com/200/200/"),
@@ -32,8 +34,12 @@ export class Service {
         return Service.listeArticlesStub;
     }
 
-    public returnPageArticleStub(page : number = 0, nbArticle : number = 10): Array<Article>{
+    public returnPageArticlesStub(page : number = 0, nbArticle : number = Service.TAILLE_PAGE): Array<Article>{
         return Service.listeArticlesStub.slice(page*nbArticle,(page+1)*nbArticle);
+    }
+
+    public getNombreDePage(taillePage : number = Service.TAILLE_PAGE) : number {
+        return Math.ceil(Service.listeArticlesStub.length/taillePage);
     }
 
     public getArticleParID(id:number){

@@ -2,24 +2,25 @@ import * as $ from 'jquery';
 import {Service} from '../Service/Service';
 import {getNav} from '../View/ViewMenu';
 import { IController } from './IController';
-import {generateHTMLArticle} from '../View/ViewArticle';
+import {generateHTMLArticle, getEnteteAccueil, getBasAccueil} from '../View/ViewArticle';
 import { Panier } from '../Model/Panier';
 import { PanierController } from './PanierController';
 
 export class AccueilController implements IController{
 
-    public constructor(){
-
+    public constructor(private page : number = 0){
     }
 
     //Génère l'html pour afficher l'accueil
     public generateTableauHTMLArticles() : string{
-        let html = "<div class='container table-responsive'><table class='table table-hover'>";
-        let liArticles = new Service().returnArticlesStub();
+        let serveur : Service = new Service();
+        let liArticles = serveur.returnPageArticlesStub(this.page == undefined ? 0 : this.page);
+        let nbPage = serveur.getNombreDePage();
+        let html = getEnteteAccueil(nbPage);
         liArticles.forEach(element => {
             html += generateHTMLArticle(element);
         });
-        return html += "</table></div>";
+        return html += getBasAccueil(nbPage);
     }
 
     public display(){
