@@ -17,6 +17,7 @@ export class DescriptionController implements IController{
         let html = getNav();
         html += "<div class='container'><table class='table table-hover table-responsive'>";
         html += generateHTMLArticle(new Service().getArticleParID(this.id), true); //description article
+        html += "</table></div>";
         body.html(html);
         this.chargerEventBouton();
     }

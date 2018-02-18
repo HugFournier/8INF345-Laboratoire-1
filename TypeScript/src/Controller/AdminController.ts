@@ -20,8 +20,8 @@ export class AdminController implements IController{
     }
 
     private generateTableauArticleAdmin(): string{
-        let html;
-        let liArticles = new Service().returnArticlesStub();
+        let html : string = "";
+        let liArticles : Article[] = new Service().returnArticlesStub();
         liArticles.forEach(article => {
             html += generateArticleAdmin(article);
         });
