@@ -12,6 +12,9 @@ import { AdminController } from './Controller/AdminController';
 import { DescriptionController } from './Controller/DescriptionController';
 //#endregion
 
+/*
+  * Redirige l'utilisateur sur différentes pages en fonction du paramètre récupéré en URL
+*/
 $(function(){
     //Récupération des paramètres URL
     let uri = parseQueryString(null);

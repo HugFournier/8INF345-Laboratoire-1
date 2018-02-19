@@ -8,7 +8,7 @@ export function generateHTMLArticle(element: Article, isDetailed: boolean = fals
         <tr idArticle="${element.getID()}" class="articleAccueil">
             <td><img src="${element.getImage()}" class="img-responsive" alt="${element.getLabel()}"/></td>
             <td> ${element.getLabel()} </td>
-            <!--<td>${(element.getDescription().length > 28 && !isDetailed ? element.getDescription().substring(0, 25) + "..." : element.getDescription())}</td>-->
+            <td>${( isDetailed ? element.getDescription() : "")}</td>
             <td>$${element.getPrix()}</td>
             <td>${getBoutonAjouterPanier(element.getID())}</td>
             ${!isDetailed ? "<td>"+getBoutonDetail(element.getID())+"</td>" : ""}
