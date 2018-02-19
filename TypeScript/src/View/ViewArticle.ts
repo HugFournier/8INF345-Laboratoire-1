@@ -5,30 +5,30 @@ import {Panier} from "../Model/Panier";
 
 export function generateHTMLArticle(element: Article, isDetailed: boolean = false) : string {
     return ` 
-        <tr idArticle="${element.getID()}" class="articleAccueil">
-            <td><img src="${element.getImage()}" class="img-responsive" alt="${element.getLabel()}"/></td>
-            <td> ${element.getLabel()} </td>
-            <td>${( isDetailed ? element.getDescription() : "")}</td>
-            <td>$${element.getPrix()}</td>
-            <td>${getBoutonAjouterPanier(element.getID())}</td>
-            ${!isDetailed ? "<td>"+getBoutonDetail(element.getID())+"</td>" : ""}
-        </tr>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <p><img src="${element.getImage()}" class="img-responsive" alt="${element.getLabel()}"/></p>
+            <p> ${element.getLabel()} </p>
+            <p>${isDetailed ? element.getDescription() : ""}</p>
+            <p>$${element.getPrix()} ${!isDetailed ? getBoutonDetail(element.getID()) : ""}</p>
+            <p>${getBoutonAjouterPanier(element.getID())}</p>
+            
+        </div>
     `;
 }
 
 export function getEnteteAccueil(nbPage : number) : string {
     return `
         <br/>
-        <div class="container table-responsive text-center">
+        <div class="container-fluid">
             ${getLienPagination(nbPage)}
             <br/><br/>
-            <table class="table table-hover">
+            <div class="row">
     `;
 }
 
 export function getBasAccueil(nbPage : number) : string {
     return `
-            </table>
+            </div>
             ${getLienPagination(nbPage)}
             <br/><br/>
         </div>
