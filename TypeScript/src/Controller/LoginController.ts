@@ -6,23 +6,19 @@ import { AdminController } from './AdminController';
 
 export class LoginController implements IController{
 
+    private incorrect: boolean = false;
+
     public display(){
         let body = $('body');
-        let htmlAcc = getNav();
-        htmlAcc += generateHTMLFormLogin();
-        body.html(htmlAcc);
+        let htmlLogin = getNav();
+        htmlLogin += generateHTMLFormLogin();
+        body.html(htmlLogin);
         let btnLogin = $('#loginButton').on('click', function(event){
             if($('#login').val() == "admin" && $('#pwd').val() == "admin"){
                 let controller = new AdminController();
                 controller.display();
             } else {
-                htmlAcc += `
-                    <br/>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <p class="text-center">Identifiant ou mot de passe incorrect</p>
-                    </div>
-                `;
-                body.html(htmlAcc);
+                $('#formLogin').before('<p class="text-center" style="color:red">Identifiant ou mot de passe incorrect</p>');                
             }
         });
     }

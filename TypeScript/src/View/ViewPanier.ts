@@ -11,11 +11,11 @@ export function getEntetePanier(): string{
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th style="width:55%">Article</th>
+                    <th style="width:60%">Article</th>
                     <th style="width:10%">Prix</th>
-                    <th style="width:10%">Quantitée</th>
+                    <th style="width:5%">Quantitée</th>
                     <th style="width:20%">Sous-Total</th>
-                    <th style="width:5%"><th>
+                    <th style="width:10%"><th>
                 </tr>
             </thead>
             <tbody>
@@ -28,11 +28,11 @@ export function generateHTMLArticlePanier(articlepanier: ArticlePanier): string{
         <tr>
             <td>
                 <div class="row">
-                    <div class="col-sm-3">
-                        <img src="${article.getImage()}" class="img-responsive"/>
+                    <div class="col-sm-3 hidden-sm">
+                        <img src="${article.getImage()}" class="img-responsive" alt="${article.getLabel()}"/>
                     </div>
                     <div class="col-sm-10">
-                        <h3>${article.getLabel()}</h3>
+                        <h4>${article.getLabel()}</h4>
                         <p>${article.getDescription()}</p>
                     </div>
                 </div>

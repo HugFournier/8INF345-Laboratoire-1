@@ -4,7 +4,7 @@ export function generateHTMLFormLogin(): string{
     return `
         <br/><br/>
         <div class="container text-center">
-            <div class="input-group mb-3">
+            <div class="input-group mb-3" id="formLogin">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Identifiant</span>
                 </div>

@@ -6,7 +6,7 @@ import {Panier} from "../Model/Panier";
 export function generateHTMLArticle(element: Article, isDetailed: boolean = false) : string {
     return ` 
         <tr idArticle="${element.getID()}" class="articleAccueil">
-            <td><img src="${element.getImage()}"/></td>
+            <td><img src="${element.getImage()}" class="img-responsive" alt="${element.getLabel()}"/></td>
             <td> ${element.getLabel()} </td>
             <!--<td>${(element.getDescription().length > 28 && !isDetailed ? element.getDescription().substring(0, 25) + "..." : element.getDescription())}</td>-->
             <td>$${element.getPrix()}</td>

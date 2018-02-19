@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10443,7 +10443,7 @@ return jQuery;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 function getNav() {
-    return "\n        <nav class='navbar navbar-default'>\n            <div class='container'>\n                <div class='navbar-header'>\n                    <a class='navbar-brand' href='?'>March\u00E9 m\u00E9m\u00E9</a>\n                </div>\n                <ul class='nav navbar-nav'>\n                    <li><a href=\"?\">Accueil</a></li>\n                    <li><a href=\"?view=Panier\">Panier</a></li>\n                    <li><a href=\"?view=Login\">Se connecter</a></li>\n                </ul>\n                </div>\n        </nav>";
+    return "\n        <div>\n            <img src=\"src/Images/mememarket.PNG\" class=\"img-fluid\" />\n        </div>\n        <nav class=\"navbar navbar-expand-sm navbar-dark bg-dark\">\n            <div class=\"container-fluid\">\n                <a class=\"navbar-brand\" href=\"?\">M\u00E9m\u00E9 Market</a>\n                <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarResponsive\">\n                    <span class=\"navbar-toggler-icon\"></span>\n                </button>\n                <div class=\"collapse navbar-collapse\" id=\"navbarResponsive\">\n                    <ul class=\"navbar-nav ml-auto\">\n                    <li class=\"nav-item\">\n                        <a class=\"nav-link\" href=\"?\">Accueil</a>\n                    </li>\n                    <li class=\"nav-item\">\n                        <a class=\"nav-link\" href=\"?view=Panier\">Panier</a>\n                    </li>\n                    <li class=\"nav-item\">\n                        <a class=\"nav-link\" href=\"?view=Login\">Se connecter</a>\n                    </li>\n                    </ul>\n                </div>\n            </div>\n        </nav>\n    ";
 }
 exports.getNav = getNav;
 
@@ -10455,18 +10455,34 @@ exports.getNav = getNav;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Article_1 = __webpack_require__(8);
+var Article_1 = __webpack_require__(4);
 var Service = /** @class */function () {
     function Service() {}
     Service.prototype.returnArticlesStub = function () {
         return Service.listeArticlesStub;
+    };
+    Service.prototype.returnPageArticlesStub = function (page, nbArticle) {
+        if (page === void 0) {
+            page = 0;
+        }
+        if (nbArticle === void 0) {
+            nbArticle = Service.TAILLE_PAGE;
+        }
+        return Service.listeArticlesStub.slice(page * nbArticle, (page + 1) * nbArticle);
+    };
+    Service.prototype.getNombreDePage = function (taillePage) {
+        if (taillePage === void 0) {
+            taillePage = Service.TAILLE_PAGE;
+        }
+        return Math.ceil(Service.listeArticlesStub.length / taillePage);
     };
     Service.prototype.getArticleParID = function (id) {
         return Service.listeArticlesStub.find(function (e) {
             return e.getID() == id;
         });
     };
-    Service.listeArticlesStub = [new Article_1.Article(0, "Aspirateur 300", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 16, "http://lorempixel.com/200/200"), new Article_1.Article(1, "Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 20, "http://lorempixel.com/200/200"), new Article_1.Article(2, "Aspirateur 300", "blablabla", 30, "http://lorempixel.com/200/200"), new Article_1.Article(3, "Tondeuse à gazon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 40, "http://lorempixel.com/200/200")];
+    Service.TAILLE_PAGE = 10;
+    Service.listeArticlesStub = [new Article_1.Article(0, "Pneu neige gauche", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 530, "http://lorempixel.com/200/200/"), new Article_1.Article(1, "Pneu neige droit", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 500, "http://lorempixel.com/200/200/"), new Article_1.Article(2, "Cafetière", "blablabla", 70, "http://lorempixel.com/200/200/"), new Article_1.Article(3, "Jungle speed", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 10, "http://lorempixel.com/200/200/"), new Article_1.Article(4, "Mouchoir Great Value", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 0.99, "http://lorempixel.com/200/200/"), new Article_1.Article(5, "Oeuf", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 5, "http://lorempixel.com/200/200/"), new Article_1.Article(6, "Statuette", "blablabla", 10000, "http://lorempixel.com/200/200/"), new Article_1.Article(7, "Trophé", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 40, "http://lorempixel.com/200/200/"), new Article_1.Article(8, "Miroir", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 35, "http://lorempixel.com/200/200/"), new Article_1.Article(9, "Extincteur", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 45, "http://lorempixel.com/200/200/"), new Article_1.Article(10, "Falcon Heavy", "blablabla", 1, "http://lorempixel.com/200/200/"), new Article_1.Article(11, "Flocon d'avoine", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 15, "http://lorempixel.com/200/200/"), new Article_1.Article(12, "Déodorant", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 6, "http://lorempixel.com/200/200/"), new Article_1.Article(13, "Bières", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 21, "http://lorempixel.com/200/200/"), new Article_1.Article(14, "Micro-ondes", "blablabla", 30, "http://lorempixel.com/200/200/"), new Article_1.Article(15, "Machine à laver", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 110, "http://lorempixel.com/200/200/"), new Article_1.Article(16, "Sèche linge", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 100, "http://lorempixel.com/200/200/"), new Article_1.Article(17, "Bacon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 2, "http://lorempixel.com/200/200/"), new Article_1.Article(18, "Nutella", "blablabla", 10, "http://lorempixel.com/200/200/"), new Article_1.Article(19, "Stylo", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 3, "http://lorempixel.com/200/200/"), new Article_1.Article(20, "SLS", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 1, "http://lorempixel.com/200/200/"), new Article_1.Article(21, "Fauteuil détente", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 20000, "http://lorempixel.com/200/200/"), new Article_1.Article(22, "Télécommande", "blablabla", 12, "http://lorempixel.com/200/200/"), new Article_1.Article(23, "Néon", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 40, "http://lorempixel.com/200/200/")];
     return Service;
 }();
 exports.Service = Service;
@@ -10481,7 +10497,7 @@ exports.Service = Service;
 Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
 var ViewMenu_1 = __webpack_require__(1);
-var Panier_1 = __webpack_require__(4);
+var Panier_1 = __webpack_require__(6);
 var ViewPanier_1 = __webpack_require__(11);
 var StorageHelper_1 = __webpack_require__(12);
 var FabriquePanier_1 = __webpack_require__(13);
@@ -10495,29 +10511,64 @@ var PanierController = /** @class */function () {
         panier.getArticlesPanier().forEach(function (e) {
             return htmlPanier += ViewPanier_1.generateHTMLArticlePanier(e);
         });
-        htmlPanier += ViewPanier_1.getBasPanier();
+        htmlPanier += ViewPanier_1.getBasPanier(panier);
         body.html(htmlPanier);
+        this.chargerEventBoutonSuppression();
+        this.chargerEventBoutonPasserCommande();
+    };
+    PanierController.prototype.chargerEventBoutonSuppression = function () {
+        var btn = $('.supprimerArticlePanier').on('click', function (event) {
+            var id = +event.currentTarget.getAttribute("idArticle");
+            var CPanier = new PanierController();
+            CPanier.removeArticleParID(id);
+            CPanier.display();
+        });
+    };
+    PanierController.prototype.chargerEventBoutonPasserCommande = function () {
+        var btn = $('.passerCommande').on('click', function (event) {
+            var CPanier = new PanierController();
+            CPanier.viderPanier();
+            CPanier.display();
+            alert("Commande réalisée avec succès, votre numéro de commande est le " + CPanier.randomisation() + ". Vous pouvez maitenant retourner à l'accueil");
+        });
+    };
+    PanierController.prototype.randomisation = function () {
+        var randomNumbers = "",
+            randomLetters = "",
+            possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (var i_1 = 0; i_1 < 10; i_1++) randomNumbers += (Math.floor(Math.random() * 9) + 1).toString();
+        for (var i = 0; i < 5; i++) randomLetters += possible.charAt(Math.floor(Math.random() * possible.length));
+        return "#" + randomLetters + ":" + randomNumbers;
     };
     PanierController.prototype.addArticleParID = function (id) {
         var stockage = new StorageHelper_1.LocalStorageWorker();
-        var panier = new FabriquePanier_1.FabriquePanier().factoryArticlePanierFromJSON(JSON.parse(stockage.get("panier")));
-        if (panier == null) {
-            panier = new Panier_1.Panier();
-        } else {
-            stockage.remove("panier");
-        }
+        var panier = this.getPanier();
+        stockage.remove("panier");
         panier.addItem(id);
         stockage.add('panier', JSON.stringify(panier));
     };
+    PanierController.prototype.removeArticleParID = function (id) {
+        var stockage = new StorageHelper_1.LocalStorageWorker();
+        var panier = this.getPanier();
+        stockage.remove("panier");
+        panier.removeItem(id);
+        stockage.add('panier', JSON.stringify(panier));
+    };
+    PanierController.prototype.viderPanier = function () {
+        var stockage = new StorageHelper_1.LocalStorageWorker();
+        stockage.remove("panier");
+    };
     PanierController.prototype.getPanier = function () {
         var stockage = new StorageHelper_1.LocalStorageWorker();
-        console.log(stockage.get('panier'));
-        var panier = new FabriquePanier_1.FabriquePanier().factoryArticlePanierFromJSON(JSON.parse(stockage.get("panier")));
-        if (panier == null) {
+        var panierString = stockage.get("panier");
+        var panier;
+        if (panierString == null || panierString === "") {
             panier = new Panier_1.Panier();
+            stockage.remove("panier");
             stockage.add("panier", JSON.stringify(panier));
+        } else {
+            panier = new FabriquePanier_1.FabriquePanier().factoryArticlePanierFromJSON(panierString);
         }
-        console.log(panier);
         return panier;
     };
     return PanierController;
@@ -10526,178 +10577,6 @@ exports.PanierController = PanierController;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ArticlePanier_1 = __webpack_require__(10);
-var Panier = /** @class */function () {
-    function Panier() {
-        this.items = new Array();
-    }
-    Panier.prototype.addItem = function (id) {
-        var articlePanier = this.items.find(function (articlePanier) {
-            return articlePanier.getID() === id;
-        });
-        if (articlePanier == undefined) {
-            this.items.push(new ArticlePanier_1.ArticlePanier(id, 1));
-        } else {
-            articlePanier.setQuantite(articlePanier.getQuantite() + 1);
-        }
-    };
-    Panier.prototype.getArticlesPanier = function () {
-        return this.items;
-    };
-    return Panier;
-}();
-exports.Panier = Panier;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(0);
-var Service_1 = __webpack_require__(2);
-var ViewMenu_1 = __webpack_require__(1);
-var ViewAdmin_1 = __webpack_require__(16);
-var AdminController = /** @class */function () {
-    function AdminController() {}
-    AdminController.prototype.display = function () {
-        var body = $('body');
-        var htmlAdmin = ViewMenu_1.getNav();
-        htmlAdmin += ViewAdmin_1.getEnTeteTableau();
-        htmlAdmin += this.generateTableauArticleAdmin();
-        htmlAdmin += ViewAdmin_1.getBasTableau();
-        body.html(htmlAdmin);
-        this.chargerEventBoutonModifier();
-        this.chargerEventBoutonAjouter();
-        this.chargerEventBoutonSupprimer();
-    };
-    AdminController.prototype.generateTableauArticleAdmin = function () {
-        var html;
-        var liArticles = new Service_1.Service().returnArticlesStub();
-        liArticles.forEach(function (article) {
-            html += ViewAdmin_1.generateArticleAdmin(article);
-        });
-        return html;
-    };
-    AdminController.prototype.chargerEventBoutonAjouter = function () {
-        var btn = $('#ajouterArticleAdmin').on('click', function (event) {
-            alert("Vous avez ajouté un article.");
-        });
-    };
-    AdminController.prototype.chargerEventBoutonSupprimer = function () {
-        var btn = $('.btnSuppr').on('click', function (event) {
-            alert("Vous avez supprimé l'article.");
-        });
-    };
-    AdminController.prototype.chargerEventBoutonModifier = function () {
-        var btn = $('.btnModif').on('click', function (event) {
-            alert("Vous avez modifié l'article.");
-        });
-    };
-    return AdminController;
-}();
-exports.AdminController = AdminController;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-//#region import
-var $ = __webpack_require__(0);
-var AccueilController_1 = __webpack_require__(7);
-var PanierController_1 = __webpack_require__(3);
-var LoginController_1 = __webpack_require__(14);
-var AdminController_1 = __webpack_require__(5);
-//#endregion
-$(function () {
-    //Récupération des paramètres URL
-    var uri = parseQueryString(null);
-    var controller;
-    if (uri['view'] === "Accueil" || uri['view'] == null) {
-        controller = new AccueilController_1.AccueilController();
-    } else if (uri['view'] === "Panier") {
-        controller = new PanierController_1.PanierController();
-    } else if (uri['view'] === "Login") {
-        controller = new LoginController_1.LoginController();
-    } else if (uri['view'] === "Admin") {
-        controller = new AdminController_1.AdminController();
-    }
-    controller.display();
-});
-/*
-  * Récupère les paramètres dans l'URL et les stock dans une map
-  * Fonction récupéré sur le site : https://www.malcontentboffin.com/2016/11/TypeScript-Function-Decodes-URL-Parameters.html
-*/
-function parseQueryString(queryString) {
-    if (queryString == null) {
-        queryString = window.location.search.substring(1);
-    }
-    var params = new Map();
-    var queries = queryString.split("&");
-    queries.forEach(function (indexQuery) {
-        var indexPair = indexQuery.split("=");
-        var queryKey = decodeURIComponent(indexPair[0]);
-        var queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
-        params[queryKey] = queryValue;
-    });
-    return params;
-}
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(0);
-var Service_1 = __webpack_require__(2);
-var ViewMenu_1 = __webpack_require__(1);
-var ViewArticle_1 = __webpack_require__(9);
-var PanierController_1 = __webpack_require__(3);
-var AccueilController = /** @class */function () {
-    function AccueilController() {}
-    //Génère l'html pour afficher l'accueil
-    AccueilController.prototype.generateTableauHTMLArticles = function () {
-        var html = "<div class='container'><table class='table table-hover table-responsive'>";
-        var liArticles = new Service_1.Service().returnArticlesStub();
-        liArticles.forEach(function (element) {
-            html += ViewArticle_1.generateHTMLArticle(element);
-        });
-        return html += "</table></div>";
-    };
-    AccueilController.prototype.display = function () {
-        var body = $('body');
-        var htmlAcc = ViewMenu_1.getNav();
-        htmlAcc += this.generateTableauHTMLArticles();
-        body.html(htmlAcc);
-        this.chargerEventBouton();
-    };
-    AccueilController.prototype.chargerEventBouton = function () {
-        var btn = $('.addPanier').on('click', function (event) {
-            var id = +event.currentTarget.getAttribute("idArticle");
-            new PanierController_1.PanierController().addArticleParID(id);
-        });
-    };
-    return AccueilController;
-}();
-exports.AccueilController = AccueilController;
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10736,7 +10615,7 @@ var Article = /** @class */function () {
 exports.Article = Article;
 
 /***/ }),
-/* 9 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10747,13 +10626,260 @@ function generateHTMLArticle(element, isDetailed) {
     if (isDetailed === void 0) {
         isDetailed = false;
     }
-    return " \n        <tr>\n            <td><img src=\"" + element.getImage() + "\"/></td>\n            <td> " + element.getLabel() + " </td>\n            <td>" + (element.getDescription().length > 28 && !isDetailed ? element.getDescription().substring(0, 25) + "..." : element.getDescription()) + "</td>\n            <td>" + element.getPrix() + " $</td>\n            <td>" + getBoutonAjouterPanier(element.getID()) + "</td>\n        </tr>\n    ";
+    return " \n        <tr idArticle=\"" + element.getID() + "\" class=\"articleAccueil\">\n            <td><img src=\"" + element.getImage() + "\"/></td>\n            <td> " + element.getLabel() + " </td>\n            <!--<td>" + (element.getDescription().length > 28 && !isDetailed ? element.getDescription().substring(0, 25) + "..." : element.getDescription()) + "</td>-->\n            <td>$" + element.getPrix() + "</td>\n            <td>" + getBoutonAjouterPanier(element.getID()) + "</td>\n            " + (!isDetailed ? "<td>" + getBoutonDetail(element.getID()) + "</td>" : "") + "\n        </tr>\n    ";
 }
 exports.generateHTMLArticle = generateHTMLArticle;
+function getEnteteAccueil(nbPage) {
+    return "\n        <br/>\n        <div class=\"container table-responsive text-center\">\n            " + getLienPagination(nbPage) + "\n            <br/><br/>\n            <table class=\"table table-hover\">\n    ";
+}
+exports.getEnteteAccueil = getEnteteAccueil;
+function getBasAccueil(nbPage) {
+    return "\n            </table>\n            " + getLienPagination(nbPage) + "\n            <br/><br/>\n        </div>\n    ";
+}
+exports.getBasAccueil = getBasAccueil;
 function getBoutonAjouterPanier(id) {
-    //return `<button class="btn btn-primary addPanier" onClick="${Panier.getInstancePanier().addItem(article)}">Ajouter au panier</button>`;
     return "<button idArticle=\"" + id + "\" class=\"btn btn-primary addPanier\">Ajouter au panier</button>";
 }
+function getBoutonDetail(id) {
+    return "<button idArticle=\"" + id + "\" class=\"btn btn-primary detail\">D\u00E9tail</button>";
+}
+function getLienPagination(nbPage) {
+    return "\n    <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">\n        " + genererLesLiens(nbPage) + "\n    </div>\n    ";
+}
+function genererLesLiens(nbPage) {
+    var html = "";
+    var i = 0;
+    for (i; i < nbPage; i++) {
+        html += '<a href="?view=Accueil&page=' + i + '" class="btn btn-primary btn-lg" role="button" aria-disabled="true">' + (i + 1) + '</a>';
+    }
+    return html;
+}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ArticlePanier_1 = __webpack_require__(10);
+var Panier = /** @class */function () {
+    function Panier() {
+        this.items = new Array();
+    }
+    Panier.prototype.addItem = function (id, quantite) {
+        if (quantite === void 0) {
+            quantite = 1;
+        }
+        var articlePanier = this.items.find(function (articlePanier) {
+            return articlePanier.getID() === id;
+        });
+        if (articlePanier == undefined) {
+            this.items.push(new ArticlePanier_1.ArticlePanier(id, quantite > 0 ? quantite : 1));
+        } else {
+            if (articlePanier.getQuantite() + quantite > 0) {
+                articlePanier.setQuantite(articlePanier.getQuantite() + quantite);
+            }
+        }
+    };
+    Panier.prototype.removeItem = function (id) {
+        var articlePanier = this.items.find(function (articlePanier) {
+            return articlePanier.getID() === id;
+        });
+        var index = this.items.indexOf(articlePanier);
+        if (index > -1) this.items.splice(index, 1);
+    };
+    Panier.prototype.getArticlesPanier = function () {
+        return this.items;
+    };
+    Panier.prototype.calculerTotal = function () {
+        var total = 0;
+        this.items.forEach(function (element) {
+            total += element.calculerTotal();
+        });
+        return total;
+    };
+    Panier.prototype.estVide = function () {
+        return this.items.length == 0;
+    };
+    return Panier;
+}();
+exports.Panier = Panier;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
+var Service_1 = __webpack_require__(2);
+var ViewMenu_1 = __webpack_require__(1);
+var ViewAdmin_1 = __webpack_require__(16);
+var Article_1 = __webpack_require__(4);
+var AdminController = /** @class */function () {
+    function AdminController() {}
+    AdminController.prototype.display = function () {
+        var body = $('body');
+        var htmlAdmin = ViewMenu_1.getNav();
+        htmlAdmin += ViewAdmin_1.getEnTeteTableau();
+        htmlAdmin += this.generateTableauArticleAdmin();
+        htmlAdmin += ViewAdmin_1.getBasTableau();
+        body.html(htmlAdmin);
+        var btn = $('#ajouterArticleAdmin').on('click', this.addArticle); //Charge l'evenement du bouton pour ajouter un article
+        this.chargerEventBoutonModifier();
+        this.chargerEventBoutonSupprimer();
+    };
+    AdminController.prototype.generateTableauArticleAdmin = function () {
+        var html = "";
+        var liArticles = new Service_1.Service().returnArticlesStub();
+        liArticles.forEach(function (article) {
+            html += ViewAdmin_1.generateArticleAdmin(article);
+        });
+        return html;
+    };
+    AdminController.prototype.addArticle = function () {
+        if (!(/^\s*$/.test($('#newID').val()) || /^\s*$/.test($('#newNom').val()) || /^\s*$/.test($('#newDescription').val()) || /^\s*$/.test($('#newPrix').val()))) {
+            var newArticle = new Article_1.Article(parseInt($('#newID').val().toString()), $('#newNom').val().toString(), $('#newDescription').val().toString(), parseInt($('#newPrix').val().toString()), "http://lorempixel.com/200/200/");
+            $('#tableAdmin').find('tbody').append(ViewAdmin_1.generateArticleAdmin(newArticle));
+            ViewAdmin_1.clearInputsAdmin();
+        } else {
+            alert("Veuillez renseigner tous les champs");
+        }
+    };
+    AdminController.prototype.chargerEventBoutonSupprimer = function () {
+        $('#tableAdmin').on('click', '.btnSuppr', function () {
+            if (confirm("Êtes-vous sûr de vouloir supprimer cette article ?") == true) {
+                $(this).closest('tr').remove();
+            }
+        });
+    };
+    AdminController.prototype.chargerEventBoutonModifier = function () {
+        var btn = $('#tableAdmin').on('click', '.btnModif', function () {
+            var ligneModif = $(this).closest('tr');
+            var newLabel = ligneModif.find('.modifLabel').val();
+            var newDescription = ligneModif.find('.modifDescription').val();
+            var newPrix = ligneModif.find('.modifPrix').val();
+            if (/^\s*$/.test(newLabel) || /^\s*$/.test(newDescription) || /^\s*$/.test(newPrix)) {
+                alert("Veuillez ne pas laisser de champs vides");
+            } else {
+                alert("Vous avez modifié l'article");
+            }
+        });
+    };
+    return AdminController;
+}();
+exports.AdminController = AdminController;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+//#region import
+var $ = __webpack_require__(0);
+var AccueilController_1 = __webpack_require__(9);
+var PanierController_1 = __webpack_require__(3);
+var LoginController_1 = __webpack_require__(14);
+var AdminController_1 = __webpack_require__(7);
+var DescriptionController_1 = __webpack_require__(17);
+//#endregion
+$(function () {
+    //Récupération des paramètres URL
+    var uri = parseQueryString(null);
+    var controller;
+    if (uri['view'] === "Accueil" || uri['view'] == null) {
+        controller = new AccueilController_1.AccueilController(uri['page'] == undefined ? 0 : +uri['page']);
+    } else if (uri['view'] === "Panier") {
+        controller = new PanierController_1.PanierController();
+    } else if (uri['view'] === "Login") {
+        controller = new LoginController_1.LoginController();
+    } else if (uri['view'] === "Admin") {
+        controller = new AdminController_1.AdminController();
+    } else if (uri['view'] === "Description") {
+        controller = new DescriptionController_1.DescriptionController(+uri['idArticle']);
+    }
+    controller.display();
+});
+/*
+  * Récupère les paramètres dans l'URL et les stock dans une map
+  * Fonction récupéré sur le site : https://www.malcontentboffin.com/2016/11/TypeScript-Function-Decodes-URL-Parameters.html
+*/
+function parseQueryString(queryString) {
+    if (queryString == null) {
+        queryString = window.location.search.substring(1);
+    }
+    var params = new Map();
+    var queries = queryString.split("&");
+    queries.forEach(function (indexQuery) {
+        var indexPair = indexQuery.split("=");
+        var queryKey = decodeURIComponent(indexPair[0]);
+        var queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
+        params[queryKey] = queryValue;
+    });
+    return params;
+}
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
+var Service_1 = __webpack_require__(2);
+var ViewMenu_1 = __webpack_require__(1);
+var ViewArticle_1 = __webpack_require__(5);
+var PanierController_1 = __webpack_require__(3);
+var AccueilController = /** @class */function () {
+    function AccueilController(page) {
+        if (page === void 0) {
+            page = 0;
+        }
+        this.page = page;
+    }
+    //Génère l'html pour afficher l'accueil
+    AccueilController.prototype.generateTableauHTMLArticles = function () {
+        var serveur = new Service_1.Service();
+        var liArticles = serveur.returnPageArticlesStub(this.page == undefined ? 0 : this.page);
+        var nbPage = serveur.getNombreDePage();
+        var html = ViewArticle_1.getEnteteAccueil(nbPage);
+        liArticles.forEach(function (element) {
+            html += ViewArticle_1.generateHTMLArticle(element);
+        });
+        return html += ViewArticle_1.getBasAccueil(nbPage);
+    };
+    AccueilController.prototype.display = function () {
+        var body = $('body');
+        var htmlAcc = ViewMenu_1.getNav();
+        htmlAcc += this.generateTableauHTMLArticles();
+        body.html(htmlAcc);
+        this.chargerEventBoutonAjoutPanier();
+        this.chargerEventBoutonDetail();
+    };
+    AccueilController.prototype.chargerEventBoutonAjoutPanier = function () {
+        var btn = $('.addPanier').on('click', function (event) {
+            var id = +event.currentTarget.getAttribute("idArticle");
+            new PanierController_1.PanierController().addArticleParID(id);
+        });
+    };
+    AccueilController.prototype.chargerEventBoutonDetail = function () {
+        var btn = $('.detail').on('click', function (event) {
+            var id = +event.currentTarget.getAttribute("idArticle");
+            window.open("?view=Description&idArticle=" + id.toString(), "_self");
+        });
+    };
+    return AccueilController;
+}();
+exports.AccueilController = AccueilController;
 
 /***/ }),
 /* 10 */
@@ -10778,12 +10904,12 @@ var ArticlePanier = /** @class */function () {
     ArticlePanier.prototype.setQuantite = function (value) {
         this.quantite = value;
     };
-    ArticlePanier.prototype.getArticleParId = function (id) {
-        return new Service_1.Service().getArticleParID(id);
+    ArticlePanier.prototype.getArticle = function () {
+        return new Service_1.Service().getArticleParID(this.id);
     };
     //Méthode permettant de calculer le sous-total en fonction du nombre d'articles
-    ArticlePanier.prototype.calculerTotal = function (article) {
-        return article.getPrix() * this.quantite;
+    ArticlePanier.prototype.calculerTotal = function () {
+        return this.getArticle().getPrix() * this.quantite;
     };
     return ArticlePanier;
 }();
@@ -10798,17 +10924,25 @@ exports.ArticlePanier = ArticlePanier;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 function getEntetePanier() {
-    return "\n    <div class=\"container\">\n        <table class=\"table table-responsive\">\n            <thead>\n                <tr>\n                    <th style=\"width:50%\">Article</th>\n                    <th style=\"width:10%\">Prix</th>\n                    <th style=\"width:10%\">Quantit\u00E9e</th>\n                    <th style=\"width:25%\">Sous-Total</th>\n                    <th style=\"width:10%\"><th>\n                </tr>\n            </thead>\n            <tbody>\n    ";
+    return "\n    <br/>\n    <div class=\"container table-responsive\">\n        <table class=\"table table-striped\">\n            <thead class=\"thead-dark\">\n                <tr>\n                    <th style=\"width:55%\">Article</th>\n                    <th style=\"width:10%\">Prix</th>\n                    <th style=\"width:10%\">Quantit\u00E9e</th>\n                    <th style=\"width:20%\">Sous-Total</th>\n                    <th style=\"width:5%\"><th>\n                </tr>\n            </thead>\n            <tbody>\n    ";
 }
 exports.getEntetePanier = getEntetePanier;
 function generateHTMLArticlePanier(articlepanier) {
-    return "\n        <tr>\n            <td>\n                <div class=\"row\">\n                    <div class=\"col-sm-3\">\n                        <img src=\"" + articlepanier.getArticleParId(articlepanier.getID()).getImage() + "\" class=\"img-responsive\"/>\n                    </div>\n                    <div class=\"col-sm-10\">\n                        <h3>" + articlepanier.getArticleParId(articlepanier.getID()).getLabel() + "</h3>\n                        <p>" + articlepanier.getArticleParId(articlepanier.getID()).getDescription() + "</p>\n                    </div>\n                </div>\n            </td>\n            <td>" + articlepanier.getArticleParId(articlepanier.getID()).getPrix() + "</td>\n            <td>" + articlepanier.calculerTotal(articlepanier.getArticleParId(articlepanier.getID())) + "</td>\n            <td> <button class=\"btn btn-danger\">Supprimer</button> </td>\n        </tr>\n    ";
+    var article = articlepanier.getArticle();
+    return "\n        <tr>\n            <td>\n                <div class=\"row\">\n                    <div class=\"col-sm-3\">\n                        <img src=\"" + article.getImage() + "\" class=\"img-responsive\"/>\n                    </div>\n                    <div class=\"col-sm-10\">\n                        <h3>" + article.getLabel() + "</h3>\n                        <p>" + article.getDescription() + "</p>\n                    </div>\n                </div>\n            </td>\n            <td>$" + article.getPrix() + "</td>\n            <td>" + articlepanier.getQuantite() + "</td>\n            <td>$" + articlepanier.calculerTotal() + "</td>\n            <td> " + getCodeBoutonSupprimer(article.getID()) + " </td>\n        </tr>\n    ";
 }
 exports.generateHTMLArticlePanier = generateHTMLArticlePanier;
-function getBasPanier() {
-    return "\n        </tbody>\n        <tfoot>\n            <tr>\n                <td class=\"text-center\">Total $ </td>\n            </tr>\n            \n    ";
+function getBasPanier(panier) {
+    var total = panier.calculerTotal();
+    return "\n        </tbody>\n        <tfoot>\n            <tr>\n                <td colspan=\"5\" class=\"text-center\">Total $" + total + "<br>" + (!panier.estVide() ? getCodeBoutonPasserCommande() : "") + "</td>\n            </tr>\n        </foot>\n            \n    ";
 }
 exports.getBasPanier = getBasPanier;
+function getCodeBoutonPasserCommande() {
+    return '<button class="btn btn-success passerCommande">Tout acheter</button>';
+}
+function getCodeBoutonSupprimer(id) {
+    return '<button idArticle=' + id.toString() + ' class="btn btn-danger supprimerArticlePanier">Supprimer</button>';
+}
 
 /***/ }),
 /* 12 */
@@ -10894,12 +11028,16 @@ exports.LocalStorageWorker = LocalStorageWorker;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Panier_1 = __webpack_require__(4);
+var Panier_1 = __webpack_require__(6);
 var FabriquePanier = /** @class */function () {
     function FabriquePanier() {}
     FabriquePanier.prototype.factoryArticlePanierFromJSON = function (JSONString) {
-        console.log(JSONString[0]);
-        return new Panier_1.Panier();
+        var panier = new Panier_1.Panier();
+        JSONString = JSON.parse(JSONString);
+        JSONString["items"].forEach(function (articlePanierJSON) {
+            panier.addItem(articlePanierJSON["id"], articlePanierJSON["quantite"]);
+        });
+        return panier;
     };
     return FabriquePanier;
 }();
@@ -10916,7 +11054,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var $ = __webpack_require__(0);
 var ViewLogin_1 = __webpack_require__(15);
 var ViewMenu_1 = __webpack_require__(1);
-var AdminController_1 = __webpack_require__(5);
+var AdminController_1 = __webpack_require__(7);
 var LoginController = /** @class */function () {
     function LoginController() {}
     LoginController.prototype.display = function () {
@@ -10929,7 +11067,7 @@ var LoginController = /** @class */function () {
                 var controller = new AdminController_1.AdminController();
                 controller.display();
             } else {
-                htmlAcc += "\n                    <div class=\"container\">\n                        <p class=\"text-center\" style=\"color:red;\">Identifiant ou mot de passe incorrect</p>\n                    </div>\n                ";
+                htmlAcc += "\n                    <br/>\n                    <div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n                    <p class=\"text-center\">Identifiant ou mot de passe incorrect</p>\n                    </div>\n                ";
                 body.html(htmlAcc);
             }
         });
@@ -10947,7 +11085,7 @@ exports.LoginController = LoginController;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 function generateHTMLFormLogin() {
-    return "\n        <div class=\"container\">\n            <form id=\"LoginForm\">\n                <div class=\"form-group\">\n                    <label for=\"login\">Identifiant :</label>\n                    <input name=\"login\" id=\"login\" type=\"text\" class=\"form-control\" placeholder=\"Identifiant\" required/>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"pwd\">Mot de passe :</label>\n                    <input name=\"pwd\" id=\"pwd\" type=\"password\" class=\"form-control\" placeholder=\"Mot de passe\" required/>\n                </div>\n                <button type=\"submit\" class=\"btn btn-primary\" id=\"loginButton\">Connexion</button>\n            </form>\n        </div>";
+    return "\n        <br/><br/>\n        <div class=\"container text-center\">\n            <div class=\"input-group mb-3\">\n                <div class=\"input-group-prepend\">\n                    <span class=\"input-group-text\" id=\"basic-addon1\">Identifiant</span>\n                </div>\n                <input id=\"login\" type=\"text\" class=\"form-control\" placeholder=\"Identifiant\" aria-label=\"Identifiant\" aria-describedby=\"basic-addon1\">\n            </div>\n            <div class=\"input-group mb-3\">\n                <div class=\"input-group-prepend\">\n                    <span class=\"input-group-text\" id=\"basic-addon1\">Mot de passe</span>\n                </div>\n                <input id=\"pwd\" type=\"password\" class=\"form-control\" placeholder=\"Mot de passe\" aria-label=\"Mot de passe\" aria-describedby=\"basic-addon1\">\n            </div>\n            <button type=\"submit\" class=\"btn btn-primary\" id=\"loginButton\">Connexion</button>\n        </div>\n    ";
 }
 exports.generateHTMLFormLogin = generateHTMLFormLogin;
 
@@ -10959,21 +11097,68 @@ exports.generateHTMLFormLogin = generateHTMLFormLogin;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
 //Génère l'HTML pour l'entête du tableau du panneau d'administration
 function getEnTeteTableau() {
-    return "\n        <div class=\"container\">\n            <h1>Panneau d'administration</h1>\n            <table class=\"table table-responsive\">\n                <thead>\n                    <tr>\n                        <th style=\"width:25%\">Nom</th>\n                        <th style=\"width:55%\">Description</th>\n                        <th style=\"width:10%\">Prix</th>\n                        <th style=\"width:20%\">Action</th>\n                    </tr>\n                </thead>\n                <tbody>\n    ";
+    return "\n        <br/><br/>\n        <div class=\"container table-responsive\">\n            <h1>Panneau d'administration</h1>\n            <table id=\"tableAdmin\" class=\"table\">\n                <thead>\n                    <tr>\n                        <th style=\"width:5%\">ID</th>\n                        <th style=\"width:20%\">Nom</th>\n                        <th style=\"width:55%\">Description</th>\n                        <th style=\"width:10%\">Prix</th>\n                        <th style=\"width:20%\">Action</th>\n                    </tr>\n                </thead>\n                <tbody>\n    ";
 }
 exports.getEnTeteTableau = getEnTeteTableau;
 //Génère l'HTML pour un article passé en paramètre
 function generateArticleAdmin(article) {
-    return "\n    <tr>\n        <td><input type=\"text\" class=\"form-control\" value=\"" + article.getLabel() + "\"></td>\n        <td><input type=\"text\" class=\"form-control\" value=\"" + article.getDescription() + "\"></td>\n        <td><input type=\"number\" class=\"form-control\" value=\"" + article.getPrix() + "\"></td>\n        <td>\n            <button class=\"btn btn-success btnModif\">+</button>\n            <button class=\"btn btn-danger btnSuppr\">-</button>\n        </td>\n    </tr>\n    ";
+    return "\n    <tr>\n        <td><p>" + article.getID() + "</p></td>\n        <td><input type=\"text\" class=\"form-control modifLabel\" value=\"" + article.getLabel() + "\"></td>\n        <td><input type=\"text\" class=\"form-control modifDescription\" value=\"" + article.getDescription() + "\"></td>\n        <td><input type=\"number\" class=\"form-control modifPrix\" value=\"" + article.getPrix() + "\" min=\"0\"></td>\n        <td>\n            <button class=\"btn btn-success btnModif\">+</button>\n            <button class=\"btn btn-danger btnSuppr\">-</button>\n        </td>\n    </tr>\n    ";
 }
 exports.generateArticleAdmin = generateArticleAdmin;
 //Génère l'HTML pour les dernières lignes du tableau du panneau d'administration
 function getBasTableau() {
-    return "\n        <tr>\n            <td><input type=\"text\" class=\"form-control\" placeholder=\"Nom de l'article\"></td>\n            <td><input type=\"text\" class=\"form-control\" placeholder=\"Description\"></td>\n            <td><input type=\"number\" class=\"form-control\" placeholder=\"Prix\"></td>\n            <td>\n                <button id=\"ajouterArticleAdmin\" class=\"btn btn-success\">Ajouter</button>\n            </td>\n        </tr>\n        </tbody>\n        <tfoot>\n            <tr>\n                <td><a href=\"?\" class=\"btn btn-warning\">Retour</a></td>\n            </tr>\n        </tfoot>\n        </table>\n        </div>\n    ";
+    return "\n        </tbody>\n        <tfoot>\n            <tr>\n                <td><input id=\"newID\" type=\"number\" class=\"form-control\" placeholder=\"ID\"  min=\"0\"></td>\n                <td><input id=\"newNom\" type=\"text\" class=\"form-control\" placeholder=\"Nom de l'article\"></td>\n                <td><input id=\"newDescription\" type=\"text\" class=\"form-control\" placeholder=\"Description\"></td>\n                <td><input id=\"newPrix\" type=\"number\" class=\"form-control\" placeholder=\"Prix\"  min=\"0\"></td>\n                <td>\n                    <button type=\"submit\" id=\"ajouterArticleAdmin\" class=\"btn btn-success\">Ajouter</button>\n                </td>\n            </tr>\n            <tr>\n                <td><a href=\"?\" class=\"btn btn-warning\">Retour</a></td>\n            </tr>\n        </tfoot>\n        </table>\n        </div>\n    ";
 }
 exports.getBasTableau = getBasTableau;
+function clearInputsAdmin() {
+    $('#newID').val('');
+    $('#newNom').val('');
+    $('#newDescription').val('');
+    $('#newPrix').val('');
+}
+exports.clearInputsAdmin = clearInputsAdmin;
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var $ = __webpack_require__(0);
+var Service_1 = __webpack_require__(2);
+var ViewMenu_1 = __webpack_require__(1);
+var ViewArticle_1 = __webpack_require__(5);
+var PanierController_1 = __webpack_require__(3);
+var DescriptionController = /** @class */function () {
+    function DescriptionController(id) {
+        if (id === void 0) {
+            id = 0;
+        }
+        this.id = id;
+    }
+    DescriptionController.prototype.display = function () {
+        var body = $('body');
+        var html = ViewMenu_1.getNav();
+        html += "<div class='container'><table class='table table-hover table-responsive'>";
+        html += ViewArticle_1.generateHTMLArticle(new Service_1.Service().getArticleParID(this.id), true); //description article
+        html += "</table></div>";
+        body.html(html);
+        this.chargerEventBouton();
+    };
+    DescriptionController.prototype.chargerEventBouton = function () {
+        var btn = $('.addPanier').on('click', function (event) {
+            var id = +event.currentTarget.getAttribute("idArticle");
+            new PanierController_1.PanierController().addArticleParID(id);
+        });
+    };
+    return DescriptionController;
+}();
+exports.DescriptionController = DescriptionController;
 
 /***/ })
 /******/ ]);
