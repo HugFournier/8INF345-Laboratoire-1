@@ -2,17 +2,21 @@
 
 export function generateHTMLFormLogin(): string{
     return `
-        <div class="container">
-            <form id="LoginForm">
-                <div class="form-group">
-                    <label for="login">Identifiant :</label>
-                    <input name="login" id="login" type="text" class="form-control" placeholder="Identifiant" required/>
+        <br/><br/>
+        <div class="container text-center">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Identifiant</span>
                 </div>
-                <div class="form-group">
-                    <label for="pwd">Mot de passe :</label>
-                    <input name="pwd" id="pwd" type="password" class="form-control" placeholder="Mot de passe" required/>
+                <input id="login" type="text" class="form-control" placeholder="Identifiant" aria-label="Identifiant" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Mot de passe</span>
                 </div>
-                <button type="submit" class="btn btn-primary" id="loginButton">Connexion</button>
-            </form>
-        </div>`;
+                <input id="pwd" type="password" class="form-control" placeholder="Mot de passe" aria-label="Mot de passe" aria-describedby="basic-addon1">
+            </div>
+            <button type="submit" class="btn btn-primary" id="loginButton">Connexion</button>
+        </div>
+    `;
 }

@@ -17,8 +17,9 @@ export class LoginController implements IController{
                 controller.display();
             } else {
                 htmlAcc += `
-                    <div class="container">
-                        <p class="text-center" style="color:red;">Identifiant ou mot de passe incorrect</p>
+                    <br/>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p class="text-center">Identifiant ou mot de passe incorrect</p>
                     </div>
                 `;
                 body.html(htmlAcc);
