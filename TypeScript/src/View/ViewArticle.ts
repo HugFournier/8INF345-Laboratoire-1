@@ -9,13 +9,16 @@ import {Panier} from "../Model/Panier";
 */
 export function generateHTMLArticle(element: Article, isDetailed: boolean = false) : string {
     return ` 
-        <div class="col-xs-12 col-sm-6 col-md-3">
-            <p><img src="${element.getImage()}" class="img-responsive" alt="${element.getLabel()}"/></p>
-            <p> ${element.getLabel()} </p>
-            <p>${isDetailed ? element.getDescription() : ""}</p>
-            <p>$${element.getPrix()} ${!isDetailed ? getBoutonDetail(element.getID()) : ""}</p>
-            <p>${getBoutonAjouterPanier(element.getID())}</p>
-            
+        <div class="col-xs-12 col-sm-6 col-md-4" >  
+            <div class="thumbnail">
+                <img src="${element.getImage()}" class="img-responsive rounded mx-auto d-block" alt="${element.getLabel()}"/>
+                <div class="caption">
+                    <p> ${element.getLabel()} </p>
+                    <p>${isDetailed ? element.getDescription() : ""}</p>
+                    <p>$${element.getPrix()} ${!isDetailed ? getBoutonDetail(element.getID()) : ""}</p>
+                    <p>${getBoutonAjouterPanier(element.getID())}</p>
+                </div>
+            </div>
         </div>
     `;
 }
@@ -27,9 +30,9 @@ export function getEnteteAccueil(nbPage : number) : string {
     return `
         <br/>
         <div class="container-fluid">
-            ${getLienPagination(nbPage)}
+            <center>${getLienPagination(nbPage)}</center>
             <br/><br/>
-            <div class="row">
+                <div style="display:flex; align-items:stretch; flex-flow: row wrap">
     `;
 }
 
@@ -38,8 +41,9 @@ export function getEnteteAccueil(nbPage : number) : string {
 */
 export function getBasAccueil(nbPage : number) : string {
     return `
-            </div>
-            ${getLienPagination(nbPage)}
+                    
+                </div><br>
+            <center>${getLienPagination(nbPage)}</center>
             <br/><br/>
         </div>
     `;

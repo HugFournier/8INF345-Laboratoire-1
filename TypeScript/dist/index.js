@@ -10626,15 +10626,15 @@ function generateHTMLArticle(element, isDetailed) {
     if (isDetailed === void 0) {
         isDetailed = false;
     }
-    return " \n        <tr idArticle=\"" + element.getID() + "\" class=\"articleAccueil\">\n            <td><img src=\"" + element.getImage() + "\" class=\"img-responsive\" alt=\"" + element.getLabel() + "\"/></td>\n            <td> " + element.getLabel() + " </td>\n            <td>" + (isDetailed ? element.getDescription() : "") + "</td>\n            <td>$" + element.getPrix() + "</td>\n            <td>" + getBoutonAjouterPanier(element.getID()) + "</td>\n            " + (!isDetailed ? "<td>" + getBoutonDetail(element.getID()) + "</td>" : "") + "\n        </tr>\n    ";
+    return " \n        <div class=\"col-xs-12 col-sm-6 col-md-3\">\n            <p><img src=\"" + element.getImage() + "\" class=\"img-responsive\" alt=\"" + element.getLabel() + "\"/></p>\n            <p> " + element.getLabel() + " </p>\n            <p>" + (isDetailed ? element.getDescription() : "") + "</p>\n            <p>$" + element.getPrix() + " " + (!isDetailed ? getBoutonDetail(element.getID()) : "") + "</p>\n            <p>" + getBoutonAjouterPanier(element.getID()) + "</p>\n            \n        </div>\n    ";
 }
 exports.generateHTMLArticle = generateHTMLArticle;
 function getEnteteAccueil(nbPage) {
-    return "\n        <br/>\n        <div class=\"container table-responsive text-center\">\n            " + getLienPagination(nbPage) + "\n            <br/><br/>\n            <table class=\"table table-hover\">\n    ";
+    return "\n        <br/>\n        <div class=\"container-fluid\">\n            " + getLienPagination(nbPage) + "\n            <br/><br/>\n            <div class=\"row\">\n    ";
 }
 exports.getEnteteAccueil = getEnteteAccueil;
 function getBasAccueil(nbPage) {
-    return "\n            </table>\n            " + getLienPagination(nbPage) + "\n            <br/><br/>\n        </div>\n    ";
+    return "\n            </div>\n            " + getLienPagination(nbPage) + "\n            <br/><br/>\n        </div>\n    ";
 }
 exports.getBasAccueil = getBasAccueil;
 function getBoutonAjouterPanier(id) {
@@ -10790,6 +10790,9 @@ var LoginController_1 = __webpack_require__(14);
 var AdminController_1 = __webpack_require__(7);
 var DescriptionController_1 = __webpack_require__(17);
 //#endregion
+/*
+  * Redirige l'utilisateur sur différentes pages en fonction du paramètre récupéré en URL
+*/
 $(function () {
     //Récupération des paramètres URL
     var uri = parseQueryString(null);
@@ -10865,12 +10868,14 @@ var AccueilController = /** @class */function () {
         this.chargerEventBoutonAjoutPanier();
         this.chargerEventBoutonDetail();
     };
+    //Evenement du bouton pour ajouter un article au panier
     AccueilController.prototype.chargerEventBoutonAjoutPanier = function () {
         var btn = $('.addPanier').on('click', function (event) {
             var id = +event.currentTarget.getAttribute("idArticle");
             new PanierController_1.PanierController().addArticleParID(id);
         });
     };
+    //Evenement du bouton pour afficher le détail d'un article
     AccueilController.prototype.chargerEventBoutonDetail = function () {
         var btn = $('.detail').on('click', function (event) {
             var id = +event.currentTarget.getAttribute("idArticle");
