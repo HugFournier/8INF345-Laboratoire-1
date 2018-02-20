@@ -19,7 +19,7 @@ export function generateHTMLArticle(element: Article, isDetailed: boolean = fals
                 border-radius: 10px;
             "
             >
-              <div class="panel-heading">
+              <div idArticle="${element.getID()}" class="panel-heading detail">
                     <h3 align="center"> ${element.getLabel()} </h3><br>
                 </div>
                 <div class="panel-body">
@@ -27,7 +27,7 @@ export function generateHTMLArticle(element: Article, isDetailed: boolean = fals
                 </div>
                 <div class="panel-footer">
                     ${isDetailed ? '<p align="justify" style="padding:4%">' + element.getDescription() + '</p>': ""}
-                    <h1 align="center">$${element.getPrix()}</h1>
+                    <h1 align="center" idArticle="${element.getID()}" class="detail">$${element.getPrix()}</h1>
                     <p align="center">${getBoutonAjouterPanier(element.getID())}</p>
                 </div>
             </div>
