@@ -9,7 +9,7 @@ import {Panier} from "../Model/Panier";
 */
 export function generateHTMLArticle(element: Article, isDetailed: boolean = false) : string {
     return ` 
-        <div class="col-xs-12 col-sm-6 col-md-4" >  
+        <div ${!isDetailed ? 'class="col-xs-12 col-sm-6 col-md-4"' : ""}>  
             <div class="panel panel primary"
             style="
                 background-color: rgb(228, 228, 176);
@@ -20,15 +20,15 @@ export function generateHTMLArticle(element: Article, isDetailed: boolean = fals
             "
             >
               <div class="panel-heading">
-                    <h3> ${element.getLabel()} </h3>
+                    <h3 align="center"> ${element.getLabel()} </h3><br>
                 </div>
                 <div class="panel-body">
                     <img src="${element.getImage()}" idArticle="${element.getID()}" class="img-responsive rounded mx-auto d-block detail" alt="${element.getLabel()}"/>
                 </div>
                 <div class="panel-footer">
-                    <p align="justify">${isDetailed ? element.getDescription() : ""}</p>
-                    <p>$${element.getPrix()}</p>
-                    <p>${getBoutonAjouterPanier(element.getID())}</p>
+                    ${isDetailed ? '<p align="justify" style="padding:4%">' + element.getDescription() + '</p>': ""}
+                    <h1 align="center">$${element.getPrix()}</h1>
+                    <p align="center">${getBoutonAjouterPanier(element.getID())}</p>
                 </div>
             </div>
         </div>
