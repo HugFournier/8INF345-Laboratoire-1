@@ -18,7 +18,9 @@ export class LoginController implements IController{
                 let controller = new AdminController();
                 controller.display();
             } else {
-                $('#formLogin').before('<p class="text-center" style="color:red">Identifiant ou mot de passe incorrect</p>');                
+                if($("#errLog").length == 0){
+                    $('#formLogin').before('<p id="errLog" class="text-center" style="color:red">Identifiant ou mot de passe incorrect</p>');                
+                }
             }
         });
     }

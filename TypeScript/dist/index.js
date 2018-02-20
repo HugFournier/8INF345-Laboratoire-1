@@ -10630,7 +10630,7 @@ function generateHTMLArticle(element, isDetailed) {
     if (isDetailed === void 0) {
         isDetailed = false;
     }
-    return " \n        <div class=\"col-xs-12 col-sm-6 col-md-4\" >  \n            <div class=\"panel panel primary\"\n            style=\"\n                background-color: rgb(228, 228, 176);\n                padding-bottom: 1%;\n                margin-bottom: 4%;\n                padding-top: 27px;\n                border-radius: 10px;\n            \"\n            >\n              <div class=\"panel-heading\">\n                    <h3> " + element.getLabel() + " </h3>\n                </div>\n                <div class=\"panel-body\">\n                    <img src=\"" + element.getImage() + "\" idArticle=\"" + element.getID() + "\" class=\"img-responsive rounded mx-auto d-block detail\" alt=\"" + element.getLabel() + "\"/>\n                </div>\n                <div class=\"panel-footer\">\n                    <p align=\"justify\">" + (isDetailed ? element.getDescription() : "") + "</p>\n                    <p>$" + element.getPrix() + "</p>\n                    <p>" + getBoutonAjouterPanier(element.getID()) + "</p>\n                </div>\n            </div>\n        </div>\n    ";
+    return " \n        <div " + (!isDetailed ? 'class="col-xs-12 col-sm-6 col-md-4"' : "") + ">  \n            <div class=\"panel panel primary\"\n            style=\"\n                background-color: rgb(228, 228, 176);\n                padding-bottom: 1%;\n                margin-bottom: 4%;\n                padding-top: 27px;\n                border-radius: 10px;\n            \"\n            >\n              <div idArticle=\"" + element.getID() + "\" class=\"panel-heading detail\">\n                    <h3 align=\"center\"> " + element.getLabel() + " </h3><br>\n                </div>\n                <div class=\"panel-body\">\n                    <img src=\"" + element.getImage() + "\" idArticle=\"" + element.getID() + "\" class=\"img-responsive rounded mx-auto d-block detail\" alt=\"" + element.getLabel() + "\"/>\n                </div>\n                <div class=\"panel-footer\">\n                    " + (isDetailed ? '<p align="justify" style="padding:4%">' + element.getDescription() + '</p>' : "") + "\n                    <h1 align=\"center\" idArticle=\"" + element.getID() + "\" class=\"detail\">$" + element.getPrix() + "</h1>\n                    <p align=\"center\">" + getBoutonAjouterPanier(element.getID()) + "</p>\n                </div>\n            </div>\n        </div>\n    ";
 }
 exports.generateHTMLArticle = generateHTMLArticle;
 /*
@@ -10942,17 +10942,17 @@ exports.ArticlePanier = ArticlePanier;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 function getEntetePanier() {
-    return "\n    <br/>\n    <div class=\"container table-responsive\">\n        <table class=\"table table-striped\">\n            <thead class=\"thead-dark\">\n                <tr>\n                    <th style=\"width:60%\">Article</th>\n                    <th style=\"width:10%\">Prix</th>\n                    <th style=\"width:5%\">Quantit\u00E9e</th>\n                    <th style=\"width:20%\">Sous-Total</th>\n                    <th style=\"width:10%\"><th>\n                </tr>\n            </thead>\n            <tbody>\n    ";
+    return "\n    <br>\n    <div class=\"container table-responsive\">\n        <table class=\"table table-striped\">\n            <thead class=\"thead-dark\">\n                <tr>\n                    <th>Article</th>\n                    <th>Prix</th>\n                    <th>Quantit\u00E9e</th>\n                    <th>Sous-Total</th>\n                </tr>\n            </thead>\n            <tbody>\n    ";
 }
 exports.getEntetePanier = getEntetePanier;
 function generateHTMLArticlePanier(articlepanier) {
     var article = articlepanier.getArticle();
-    return "\n        <tr>\n            <td>\n                <div class=\"row\">\n                    <div class=\"col-sm-3 hidden-sm\">\n                        <img src=\"" + article.getImage() + "\" class=\"img-responsive\" alt=\"" + article.getLabel() + "\"/>\n                    </div>\n                    <div class=\"col-sm-10\">\n                        <h4>" + article.getLabel() + "</h4>\n                        <p>" + article.getDescription() + "</p>\n                    </div>\n                </div>\n            </td>\n            <td>$" + article.getPrix() + "</td>\n            <td>" + articlepanier.getQuantite() + "</td>\n            <td>$" + articlepanier.calculerTotal() + "</td>\n            <td> " + getCodeBoutonSupprimer(article.getID()) + " </td>\n        </tr>\n    ";
+    return "\n        <tr>\n            <td colspan=\"4\">\n                <div>\n                    <h4>" + article.getLabel() + "</h4>\n                    <p align=\"justify\">" + article.getDescription() + "</p>\n                </div>\n            </td>\n        </tr><tr></tr>\n        <tr>\n            <td style=\"vertical-align:bottom;\"> " + getCodeBoutonSupprimer(article.getID()) + " </td>\n            <td style=\"vertical-align:bottom;\">$" + article.getPrix() + "</td>\n            <td style=\"vertical-align:bottom;\">" + articlepanier.getQuantite() + "</td>\n            <td style=\"vertical-align:bottom;\">$" + articlepanier.calculerTotal() + "</td>\n        </tr>\n    ";
 }
 exports.generateHTMLArticlePanier = generateHTMLArticlePanier;
 function getBasPanier(panier) {
     var total = panier.calculerTotal();
-    return "\n        </tbody>\n        <tfoot>\n            <tr>\n                <td colspan=\"5\" class=\"text-center\">Total $" + total + "<br>" + (!panier.estVide() ? getCodeBoutonPasserCommande() : "") + "</td>\n            </tr>\n        </foot>\n            \n    ";
+    return "\n        </tbody>\n        <tfoot>\n            <tr>\n                <td colspan=\"4\" class=\"text-center\">Total $" + total + "<br>" + (!panier.estVide() ? getCodeBoutonPasserCommande() : "") + "</td>\n            </tr>\n        </foot>\n        </table>\n            \n    ";
 }
 exports.getBasPanier = getBasPanier;
 function getCodeBoutonPasserCommande() {
@@ -11087,7 +11087,9 @@ var LoginController = /** @class */function () {
                 var controller = new AdminController_1.AdminController();
                 controller.display();
             } else {
-                $('#formLogin').before('<p class="text-center" style="color:red">Identifiant ou mot de passe incorrect</p>');
+                if ($("#errLog").length == 0) {
+                    $('#formLogin').before('<p id="errLog" class="text-center" style="color:red">Identifiant ou mot de passe incorrect</p>');
+                }
             }
         });
     };
@@ -11163,7 +11165,7 @@ var DescriptionController = /** @class */function () {
     DescriptionController.prototype.display = function () {
         var body = $('body');
         var html = ViewMenu_1.getNav();
-        html += "<div class='container'><table class='table table-hover table-responsive'>";
+        html += "<div class='container'><table class='table table-hover table-responsive'><br>";
         html += ViewArticle_1.generateHTMLArticle(new Service_1.Service().getArticleParID(this.id), true); //description article
         html += "</table></div>";
         body.html(html);
