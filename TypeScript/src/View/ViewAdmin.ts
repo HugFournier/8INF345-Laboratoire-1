@@ -1,7 +1,9 @@
 import * as $ from 'jquery';
 import { Article } from "../Model/Article";
 
-//Génère l'HTML pour l'entête du tableau du panneau d'administration
+/*
+  * Génère l'HTML pour l'entête du tableau du panneau d'administration
+*/
 export function getEnTeteTableau(): string{
     return `
         <br/><br/>
@@ -21,7 +23,9 @@ export function getEnTeteTableau(): string{
     `;
 }
 
-//Génère l'HTML pour un article passé en paramètre
+/*
+  * Génère l'HTML pour un article passé en paramètre
+*/
 export function generateArticleAdmin(article: Article): string{
     return `
     <tr>
@@ -37,7 +41,9 @@ export function generateArticleAdmin(article: Article): string{
     `;
 }
 
-//Génère l'HTML pour les dernières lignes du tableau du panneau d'administration
+/*
+  * Génère l'HTML pour les dernières lignes du tableau du panneau d'administration
+*/
 export function getBasTableau(): string{
     return `
         </tbody>
@@ -60,6 +66,9 @@ export function getBasTableau(): string{
     `;
 }
 
+/*
+  * Vide les champs du formulaire
+*/
 export function clearInputsAdmin(){
     $('#newID').val('');
     $('#newNom').val('');

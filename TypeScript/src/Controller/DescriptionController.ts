@@ -22,6 +22,9 @@ export class DescriptionController implements IController{
         this.chargerEventBouton();
     }
 
+    /*
+      * Evenement du bouton pour ajouter l'article au panier
+    */
     private chargerEventBouton(){
         let btn = $('.addPanier').on('click', function(event){
             let id:number = +event.currentTarget.getAttribute("idArticle");

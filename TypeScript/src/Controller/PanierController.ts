@@ -20,6 +20,9 @@ export class PanierController implements IController{
         this.chargerEventBoutonPasserCommande();
     }
 
+	/*
+      * Evenement du bouton pour supprimer un article du panier
+    */
     private chargerEventBoutonSuppression(){
         let btn = $('.supprimerArticlePanier').on('click', function(event){
             let id:number = +event.currentTarget.getAttribute("idArticle");
@@ -29,6 +32,9 @@ export class PanierController implements IController{
         });
     }
 
+	/*
+      * Evenement du bouton pour passer une commande
+    */
     private chargerEventBoutonPasserCommande(){
         let btn = $('.passerCommande').on('click', function(event){
 			let CPanier : PanierController = new PanierController();
@@ -38,6 +44,9 @@ export class PanierController implements IController{
         });
     }
 
+	/*
+      * Génère 5 lettres aléatoires et 10 chiffres aléatoire et retourne la concaténation des chiffres:lettres
+    */
 	private randomisation(): string{
 		let randomNumbers = "", randomLetters = "", possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		for(let i = 0; i < 10; i++)
@@ -47,6 +56,9 @@ export class PanierController implements IController{
 		return "#" + randomLetters + ":" + randomNumbers;
 	}
 
+	/*
+      * Ajoute un article dans le Stockage local en fonction de son ID passé en paramètre
+    */
 	public addArticleParID(id:number){
 		let stockage : LocalStorageWorker = new LocalStorageWorker();
 		let panier:Panier = this.getPanier();
@@ -55,6 +67,9 @@ export class PanierController implements IController{
 		stockage.add('panier', JSON.stringify(panier));
 	}
 
+	/*
+      * Supprime un article dans le Stockage local en fonction de son ID passé en paramètre
+    */
 	public removeArticleParID(id:number){
 		let stockage : LocalStorageWorker = new LocalStorageWorker();
 		let panier:Panier = this.getPanier();
@@ -63,11 +78,17 @@ export class PanierController implements IController{
 		stockage.add('panier', JSON.stringify(panier));
 	}
 
+	/*
+      * Suprrime le panier du Stockage local
+    */
 	public viderPanier(){
 		let stockage : LocalStorageWorker = new LocalStorageWorker();
 		stockage.remove("panier");
 	}
 
+	/*
+      * Retourne un panier récupéré dans le Stockage local
+    */
 	public getPanier(): Panier{
 		let stockage : LocalStorageWorker = new LocalStorageWorker();
 		let panierString : string = stockage.get("panier");
