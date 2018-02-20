@@ -1,7 +1,7 @@
 import {Article} from '../Model/Article';
 
 export class Service {
-    private static TAILLE_PAGE : number = 10;
+    private static TAILLE_PAGE : number = 6;
 
     private static listeArticlesStub : Article[] = [
         new Article(0, "Pneu neige gauche", "Lorem ipsum dolor amet blue bottle skateboard unicorn, hashtag sartorial poutine offal master cleanse fixie. Stumptown migas gochujang dreamcatcher, you probably haven't heard of them drinking vinegar lomo viral small batch put a bird on it pitchfork neutra narwhal normcore. Craft beer tacos chambray flexitarian migas. Flannel four loko artisan humblebrag. Distillery art party master cleanse lyft vinyl offal post-ironic letterpress cray DIY forage stumptown plaid viral.", 530, "http://lorempixel.com/200/200/cats/"),

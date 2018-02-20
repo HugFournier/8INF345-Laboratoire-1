@@ -4,9 +4,6 @@ import { Article } from '../Model/Article';
 import { Panier } from '../Model/Panier';
 import { PanierController } from '../Controller/PanierController';
 
-/*
-  * Génère le code HTML pour l'entête du panier
-*/
 export function getEntetePanier(): string{
     return `
     <br/>
@@ -25,9 +22,6 @@ export function getEntetePanier(): string{
     `;
 }
 
-/*
-  * Génère le code HTML d'un pour afficher un ArticlePanier dans le panier
-*/
 export function generateHTMLArticlePanier(articlepanier: ArticlePanier): string{
     let article : Article = articlepanier.getArticle();
     return `
@@ -51,9 +45,6 @@ export function generateHTMLArticlePanier(articlepanier: ArticlePanier): string{
     `;
 }
 
-/*
-  * Génère le code HTML pour le footer du tableau
-*/
 export function getBasPanier(panier : Panier): string{
     let total : number = panier.calculerTotal();
     return `

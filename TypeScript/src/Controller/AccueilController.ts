@@ -32,9 +32,7 @@ export class AccueilController implements IController{
         this.chargerEventBoutonDetail();
     }
 
-    /*
-      * Evenement du bouton pour ajouter un article au panier
-    */
+    //Evenement du bouton pour ajouter un article au panier
     private chargerEventBoutonAjoutPanier(){
         let btn = $('.addPanier').on('click', function(event){
             let id:number = +event.currentTarget.getAttribute("idArticle");
@@ -42,9 +40,7 @@ export class AccueilController implements IController{
         });
     }
 
-    /*
-      * Evenement du bouton pour afficher le détail d'un article
-    */
+    //Evenement du bouton pour afficher le détail d'un article
     private chargerEventBoutonDetail(){
         let btn = $('.detail').on('click', function(event){
             let id:number = +event.currentTarget.getAttribute("idArticle");
