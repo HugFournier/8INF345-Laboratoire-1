@@ -3,6 +3,10 @@ import { Article } from "../Model/Article";
 import { PanierController } from "../Controller/PanierController";
 import {Panier} from "../Model/Panier";
 
+/*
+  * Génère le code HTML d'un article
+  * 'isDetailed' permet de savoir si il faut afficher la description 
+*/
 export function generateHTMLArticle(element: Article, isDetailed: boolean = false) : string {
     return ` 
         <div class="col-xs-12 col-sm-6 col-md-4" >  
@@ -19,6 +23,9 @@ export function generateHTMLArticle(element: Article, isDetailed: boolean = fals
     `;
 }
 
+/*
+  * Affiche la pagination en haut de la page
+*/
 export function getEnteteAccueil(nbPage : number) : string {
     return `
         <br/>
@@ -29,6 +36,9 @@ export function getEnteteAccueil(nbPage : number) : string {
     `;
 }
 
+/*
+  * Affiche la pagination en bas de la page
+*/
 export function getBasAccueil(nbPage : number) : string {
     return `
                     
@@ -55,6 +65,9 @@ function getLienPagination(nbPage : number):string{
     `;
 }
 
+/*
+  * Génère les liens de la pagination
+*/
 function genererLesLiens(nbPage : number):string{
     let html : string = "";
     let i : number = 0;

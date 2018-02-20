@@ -19,6 +19,9 @@ export class AdminController implements IController{
         this.chargerEventBoutonSupprimer();
     }
 
+    /*
+      * Récupère les articles de la classe Service et génère le tableau contenant tous ces articles
+    */
     private generateTableauArticleAdmin(): string{
         let html : string = "";
         let liArticles : Article[] = new Service().returnArticlesStub();
@@ -28,6 +31,9 @@ export class AdminController implements IController{
         return html;
     }
 
+    /*
+      * Fonction appelé lors de l'évenement du bouton pour ajouter un article
+    */
     private addArticle() {
         if(!(/^\s*$/.test(<string>$('#newID').val()) || /^\s*$/.test(<string>$('#newNom').val()) || /^\s*$/.test(<string>$('#newDescription').val()) || /^\s*$/.test(<string>$('#newPrix').val()))){
             let newArticle: Article = new Article(parseInt($('#newID').val().toString()), $('#newNom').val().toString(), $('#newDescription').val().toString(), parseInt($('#newPrix').val().toString()), "http://lorempixel.com/200/200/");
@@ -38,6 +44,9 @@ export class AdminController implements IController{
         }
     }
 
+    /*
+      * Evenement du bouton pour supprimer un article
+    */
     private chargerEventBoutonSupprimer(){
        
             $('#tableAdmin').on('click', '.btnSuppr', function(){
@@ -47,6 +56,9 @@ export class AdminController implements IController{
             });
     }
 
+    /*
+      * Evenement du bouton pour modifier un article
+    */
     private chargerEventBoutonModifier(){
         let btn = $('#tableAdmin').on('click', '.btnModif', function(){
             let ligneModif : JQuery<HTMLElement> = $(this).closest('tr');

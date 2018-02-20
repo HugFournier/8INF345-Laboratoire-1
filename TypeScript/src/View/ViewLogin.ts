@@ -1,5 +1,7 @@
 
-
+/*
+  * Génère le code HTML pour le formulaire de connexion
+*/
 export function generateHTMLFormLogin(): string{
     return `
         <br/><br/>

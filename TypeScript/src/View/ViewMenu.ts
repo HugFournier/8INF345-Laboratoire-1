@@ -1,3 +1,6 @@
+/*
+  * Retourne la barre de navigation
+*/
 export function getNav(): string{
     return `
         <div>
