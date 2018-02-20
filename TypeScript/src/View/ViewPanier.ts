@@ -47,7 +47,7 @@ export function getBasPanier(panier : Panier): string{
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4" class="text-center">Total $${total}<br>${!panier.estVide() ? getCodeBoutonPasserCommande() : ""}</td>
+                <td colspan="4" class="text-center"><br>Total $${total}<br><br>${!panier.estVide() ? getCodeBoutonPasserCommande() : ""}</td>
             </tr>
         </foot>
         </table>

@@ -32,10 +32,14 @@ export class PanierController implements IController{
     private chargerEventBoutonPasserCommande(){
         let btn = $('.passerCommande').on('click', function(event){
 			let CPanier : PanierController = new PanierController();
-			CPanier.viderPanier();
-			CPanier.display();
-			alert("Commande réalisée avec succès, votre numéro de commande est le " + CPanier.randomisation() + ". Vous pouvez maitenant retourner à l'accueil");
-        });
+			if(Math.random() < 0.8){
+				CPanier.viderPanier();
+				CPanier.display();
+				alert("Commande réalisée avec succès, votre numéro de commande est le " + CPanier.randomisation() + ". Vous pouvez maitenant retourner à l'accueil");
+			}else{
+				alert("Une erreur s'est produite, la commande n'a pas pu être réalisée");
+			}
+		});
     }
 
 	private randomisation(): string{
