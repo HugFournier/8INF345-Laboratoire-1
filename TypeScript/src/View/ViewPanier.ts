@@ -6,16 +6,15 @@ import { PanierController } from '../Controller/PanierController';
 
 export function getEntetePanier(): string{
     return `
-    <br/>
+    <br>
     <div class="container table-responsive">
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th style="width:60%">Article</th>
-                    <th style="width:10%">Prix</th>
-                    <th style="width:5%">Quantitée</th>
-                    <th style="width:20%">Sous-Total</th>
-                    <th style="width:10%"><th>
+                    <th>Article</th>
+                    <th>Prix</th>
+                    <th>Quantitée</th>
+                    <th>Sous-Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,21 +25,18 @@ export function generateHTMLArticlePanier(articlepanier: ArticlePanier): string{
     let article : Article = articlepanier.getArticle();
     return `
         <tr>
-            <td>
-                <div class="row">
-                    <div class="col-sm-3 hidden-sm">
-                        <img src="${article.getImage()}" class="img-responsive" alt="${article.getLabel()}"/>
-                    </div>
-                    <div class="col-sm-10">
-                        <h4>${article.getLabel()}</h4>
-                        <p>${article.getDescription()}</p>
-                    </div>
+            <td colspan="4">
+                <div>
+                    <h4>${article.getLabel()}</h4>
+                    <p align="justify">${article.getDescription()}</p>
                 </div>
             </td>
-            <td>$${article.getPrix()}</td>
-            <td>${articlepanier.getQuantite()}</td>
-            <td>$${articlepanier.calculerTotal()}</td>
-            <td> ${getCodeBoutonSupprimer(article.getID())} </td>
+        </tr><tr></tr>
+        <tr>
+            <td style="vertical-align:bottom;"> ${getCodeBoutonSupprimer(article.getID())} </td>
+            <td style="vertical-align:bottom;">$${article.getPrix()}</td>
+            <td style="vertical-align:bottom;">${articlepanier.getQuantite()}</td>
+            <td style="vertical-align:bottom;">$${articlepanier.calculerTotal()}</td>
         </tr>
     `;
 }
@@ -51,9 +47,10 @@ export function getBasPanier(panier : Panier): string{
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5" class="text-center">Total $${total}<br>${!panier.estVide() ? getCodeBoutonPasserCommande() : ""}</td>
+                <td colspan="4" class="text-center">Total $${total}<br>${!panier.estVide() ? getCodeBoutonPasserCommande() : ""}</td>
             </tr>
         </foot>
+        </table>
             
     `;
 }
